@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/09 15:07:57 by sguzman           #+#    #+#              #
-#    Updated: 2024/09/09 18:09:35 by sguzman          ###   ########.fr        #
+#    Updated: 2024/09/10 18:34:59 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,11 +53,12 @@ CYAN   = \033[0;36m
 RESET  = \033[m
 
 define compile
-    printf "%b%-46b" "$(BLUE)compiling " "$(CYAN)$(@F)$(RESET)"; \
-    $(1) > /dev/null; \
+    printf "%b%-46b" "$(BLUE)$(2) " "$(CYAN)$(@F)$(RESET)"; \
+    OUTPUT=$$($(1) 2>&1); \
     RESULT=$$?; \
     if [ $$RESULT -ne 0 ]; then \
         printf "%b\n" "$(RED)[✗]$(RESET)"; \
+	printf "%b\n" "$$OUTPUT"; \
     else  \
         printf "%b\n" "$(GREEN)[✓]$(RESET)"; \
     fi; \
