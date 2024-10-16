@@ -37,5 +37,5 @@ int PhoneBook::commandPrompt(void)
 			std::cout << "command not found: " << line << '\n';
 		std::cin.clear();
 	}
-	return (std::cin.fail());
+	return (std::cin.fail() && std::cin.eof() == 0);
 }
