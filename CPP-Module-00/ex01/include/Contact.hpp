@@ -13,6 +13,7 @@
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
+# include <iostream>
 # include <string>
 
 class Contact
@@ -20,16 +21,17 @@ class Contact
   public:
 	Contact(void);
 	~Contact(void);
-	std::string getFirstName() const;
+	std::string getFirstName(void) const;
 	void setFirstName(std::string first_name);
-	std::string getLastName() const;
+	std::string getLastName(void) const;
 	void setLastName(std::string last_name);
-	std::string getNickname() const;
+	std::string getNickname(void) const;
 	void setNickname(std::string nickname);
-	std::string getPhone() const;
+	std::string getPhone(void) const;
 	void setPhone(std::string phone);
-	std::string getSecret() const;
+	std::string getSecret(void) const;
 	void setSecret(std::string secret);
+	void displayDetails(void) const;
 
   private:
 	std::string first_name_;

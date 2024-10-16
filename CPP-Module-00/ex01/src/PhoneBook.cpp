@@ -12,7 +12,7 @@
 
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook(void)
+PhoneBook::PhoneBook(void) : size(0)
 {
 }
 
@@ -32,14 +32,25 @@ void PhoneBook::display(void)
 	std::cout << '|' << std::setw(WIDTH) << "last name";
 	std::cout << '|' << std::setw(WIDTH) << "nickname";
 	std::cout << '|' << '\n';
-	for (int i(0); i < MAX; i++)
+	for (int i(0); i < size; i++)
 	{
 		std::cout << '|' << std::setw(WIDTH) << i;
-		std::cout << '|' << std::setw(WIDTH) << truncate(contacts_[i].getFirstName());
-		std::cout << '|' << std::setw(WIDTH) << truncate(contacts_[i].getLastName());
-		std::cout << '|' << std::setw(WIDTH) << truncate(contacts_[i].getNickname());
+		std::cout << '|' << std::setw(WIDTH) << truncate(contacts[i].getFirstName());
+		std::cout << '|' << std::setw(WIDTH) << truncate(contacts[i].getLastName());
+		std::cout << '|' << std::setw(WIDTH) << truncate(contacts[i].getNickname());
 		std::cout << '|' << '\n';
 	}
+}
+
+void PhoneBook::search(void)
+{
+	if (size == 0)
+	{
+		std::cout << "phonebook is empty\n";
+		return ;
+	}
+	display();
+	// getIndex and do: contacts[index].displayDetails();
 }
 
 int PhoneBook::commandPrompt(void)
@@ -52,7 +63,7 @@ int PhoneBook::commandPrompt(void)
 		if (line == "ADD")
 			std::cout << "save a new contact" << std::endl;
 		else if (line == "SEARCH")
-			display();
+			search();
 		else if (line == "EXIT" || std::cin == 0)
 			break ;
 		std::cin.clear();

@@ -28,7 +28,9 @@ class PhoneBook
 
   private:
 	void display(void);
-	Contact contacts_[MAX];
+	void search(void);
+	int size;
+	Contact contacts[MAX];
 };
 
 #endif /* PHONEBOOK_HPP */
