@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 19:59:25 by sguzman           #+#    #+#             */
-/*   Updated: 2024/09/10 19:59:26 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/10/16 18:39:01 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define MAX 8
 # include "Contact.hpp"
+# include <iomanip>
 # include <iostream>
 
 class PhoneBook
@@ -25,6 +26,7 @@ class PhoneBook
 	int commandPrompt(void);
 
   private:
+	void display(void);
 	Contact contacts_[MAX];
 };
 
