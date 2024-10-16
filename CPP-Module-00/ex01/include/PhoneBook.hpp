@@ -14,6 +14,7 @@
 # define PHONEBOOK_HPP
 
 # define MAX 8
+# define WIDTH 10
 # include "Contact.hpp"
 # include <iomanip>
 # include <iostream>
