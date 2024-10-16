@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:16:09 by sguzman           #+#    #+#             */
-/*   Updated: 2024/09/10 18:48:08 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/10/16 16:01:00 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	loud(void)
 void	touppercase(int argc, char **argv)
 {
 	for (int i = 1; i < argc; i++)
-		for (int j = 0; *(*(argv + i) + j); j++)
-			std::cout << (char)toupper(*(*(argv + i) + j));
+		for (int j = 0; argv[i][j]; j++)
+			std::cout << static_cast<char>(toupper(argv[i][j]));
 }
 
 int	main(int argc, char **argv)
