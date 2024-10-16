@@ -32,7 +32,7 @@ OBJS_PATH    = ./build
 INCLUDE_PATH = ./include
 
 SRCS         = PhoneBook.cpp Contact.cpp
-MAIN         = my_phoneBook.cpp
+MAIN         = main.cpp
 
 ################################################################################
 #                                  Makefile  objs                              #
