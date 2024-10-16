@@ -10,4 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "PhoneBook.hpp"
 
+PhoneBook::PhoneBook(void)
+{
+}
+
+PhoneBook::~PhoneBook(void)
+{
+}
+
+int PhoneBook::commandPrompt(void)
+{
+	while (true)
+	{
+		std::cout << "phonebook$ ";
+		std::string line;
+		std::getline(std::cin, line);
+		if (line == "ADD")
+			std::cout << "save a new contact" << '\n';
+		else if (line == "SEARCH")
+			std::cout << "display a specific contact" << '\n';
+		else if (line == "EXIT" || std::cin == 0)
+			break ;
+		else if (line.empty() == 0)
+			std::cout << "command not found: " << line << '\n';
+		std::cin.clear();
+	}
+	return (std::cin.fail());
+}

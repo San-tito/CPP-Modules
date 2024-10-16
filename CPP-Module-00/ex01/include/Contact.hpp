@@ -10,4 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string>
 
+class Contact
+{
+  public:
+	Contact(void);
+	~Contact(void);
+
+  private:
+	std::string first_name_;
+	std::string last_name_;
+	std::string nickname_;
+	std::string phone_;
+	std::string secret_;
+};

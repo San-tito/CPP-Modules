@@ -10,4 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#define MAX 8
+#include "Contact.hpp"
+#include <iostream>
 
+class PhoneBook
+{
+  public:
+	PhoneBook(void);
+	~PhoneBook(void);
+	int commandPrompt(void);
+
+  private:
+	Contact contacts_[MAX];
+};

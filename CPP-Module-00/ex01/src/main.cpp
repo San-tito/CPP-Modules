@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_phoneBook.cpp                                   :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "PhoneBook.hpp"
 
 int	main(void)
 {
-	std::cout << "\n\033[35m                                                               Santi es una zorra\033[0m" << std::endl;
-	return (0);
+	int			ret;
+	PhoneBook	phoneBook;
+
+	ret = phoneBook.commandPrompt();
+	return (ret);
 }
