@@ -22,22 +22,22 @@ PhoneBook::~PhoneBook(void)
 
 inline std::string truncate(std::string str)
 {
-	return ((str.length() > 10) ? str.substr(0, 9).replace(9, 10, ".") : str);
+	return ((str.length() > WIDTH) ? str.substr(0, WIDTH - 1) + "." : str);
 }
 
 void PhoneBook::display(void)
 {
-	std::cout << '|' << std::setw(10) << "index";
-	std::cout << '|' << std::setw(10) << "first name";
-	std::cout << '|' << std::setw(10) << "last name";
-	std::cout << '|' << std::setw(10) << "nickname";
+	std::cout << '|' << std::setw(WIDTH) << "index";
+	std::cout << '|' << std::setw(WIDTH) << "first name";
+	std::cout << '|' << std::setw(WIDTH) << "last name";
+	std::cout << '|' << std::setw(WIDTH) << "nickname";
 	std::cout << '|' << '\n';
 	for (int i(0); i < MAX; i++)
 	{
-		std::cout << '|' << std::setw(10) << i;
-		std::cout << '|' << std::setw(10) << truncate(contacts_[i].getFirstName());
-		std::cout << '|' << std::setw(10) << truncate(contacts_[i].getLastName());
-		std::cout << '|' << std::setw(10) << truncate(contacts_[i].getNickname());
+		std::cout << '|' << std::setw(WIDTH) << i;
+		std::cout << '|' << std::setw(WIDTH) << truncate(contacts_[i].getFirstName());
+		std::cout << '|' << std::setw(WIDTH) << truncate(contacts_[i].getLastName());
+		std::cout << '|' << std::setw(WIDTH) << truncate(contacts_[i].getNickname());
 		std::cout << '|' << '\n';
 	}
 }
