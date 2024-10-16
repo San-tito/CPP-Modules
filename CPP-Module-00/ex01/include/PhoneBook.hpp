@@ -10,9 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define MAX 8
-#include "Contact.hpp"
-#include <iostream>
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
+
+# define MAX 8
+# include "Contact.hpp"
+# include <iostream>
 
 class PhoneBook
 {
@@ -24,3 +27,5 @@ class PhoneBook
   private:
 	Contact contacts_[MAX];
 };
+
+#endif /* PHONEBOOK_HPP */

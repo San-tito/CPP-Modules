@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
+
+# include <string>
 
 class Contact
 {
@@ -25,3 +28,5 @@ class Contact
 	std::string phone_;
 	std::string secret_;
 };
+
+#endif /* CONTACT_HPP */
