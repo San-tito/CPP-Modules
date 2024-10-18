@@ -15,9 +15,11 @@
 
 # define MAX 8
 # define WIDTH 10
+# define PROGRAM "phonebook"
 # include "Contact.hpp"
 # include <iomanip>
 # include <iostream>
+# include <limits>
 
 class PhoneBook
 {
@@ -27,10 +29,11 @@ class PhoneBook
 	int commandPrompt(void);
 
   private:
-	void display(void);
-	void search(void);
-	int size;
+	int count;
 	Contact contacts[MAX];
+	void add(void);
+	void search(void);
+	void display(void);
 };
 
 #endif /* PHONEBOOK_HPP */
