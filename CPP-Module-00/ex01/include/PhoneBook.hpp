@@ -26,13 +26,12 @@ class PhoneBook
   public:
 	PhoneBook(void);
 	~PhoneBook(void);
-	int commandPrompt(void);
+	void add(void);
+	void search(void);
 
   private:
 	int count;
 	Contact contacts[MAX];
-	void add(void);
-	void search(void);
 	void display(void);
 };
 

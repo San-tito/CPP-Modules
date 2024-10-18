@@ -121,19 +121,3 @@ void PhoneBook::add(void)
 	else
 		contacts[count++] = contact;
 }
-
-int PhoneBook::commandPrompt(void)
-{
-	std::string command("");
-	do
-	{
-		if (command == "ADD")
-			add();
-		else if (command == "SEARCH")
-			search();
-		else if (command == "EXIT")
-			break ;
-		std::cout << "$ ";
-	} while (std::getline(std::cin, command));
-	return (std::cin.fail());
-}

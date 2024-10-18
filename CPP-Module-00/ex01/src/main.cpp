@@ -14,9 +14,18 @@
 
 int	main(void)
 {
-	int			ret;
 	PhoneBook	phoneBook;
 
-	ret = phoneBook.commandPrompt();
-	return (ret);
+	std::string command("");
+	do
+	{
+		if (command == "ADD")
+			phoneBook.add();
+		else if (command == "SEARCH")
+			phoneBook.search();
+		else if (command == "EXIT")
+			break ;
+		std::cout << "$ ";
+	} while (std::getline(std::cin, command));
+	return (std::cin.fail());
 }
