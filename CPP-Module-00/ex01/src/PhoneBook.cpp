@@ -14,10 +14,14 @@
 
 PhoneBook::PhoneBook(void) : count(0)
 {
+	std::cout << "Welcome to my awesome " << PROGRAM << "!\n";
+	std::cout << "You can store up to " << MAX << " contacts\n";
+	std::cout << "Available commands: ADD, SEARCH, EXIT\n";
 }
 
 PhoneBook::~PhoneBook(void)
 {
+	std::cout << "Goodbye!\n";
 }
 
 inline std::string truncate(std::string str)
@@ -25,7 +29,7 @@ inline std::string truncate(std::string str)
 	return ((str.length() > WIDTH) ? str.substr(0, WIDTH - 1) + "." : str);
 }
 
-void PhoneBook::display(void)
+void PhoneBook::display(void) const
 {
 	std::cout << '|' << std::setw(WIDTH) << truncate("index");
 	std::cout << '|' << std::setw(WIDTH) << truncate("first name");
@@ -60,9 +64,9 @@ int	getIndex(void)
 	return ((success) ? index : -1);
 }
 
-void PhoneBook::search(void)
+void PhoneBook::search(void) const
 {
-	int	index;
+	int index;
 
 	if (count == 0)
 	{
@@ -77,7 +81,7 @@ void PhoneBook::search(void)
 		contacts[index].displayDetails();
 }
 
-std::string getField(const std::string field)
+std::string getField(const std::string &field)
 {
 	std::string input;
 	std::cout << " [" << field << "]: ";

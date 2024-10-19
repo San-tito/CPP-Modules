@@ -27,12 +27,12 @@ class PhoneBook
 	PhoneBook(void);
 	~PhoneBook(void);
 	void add(void);
-	void search(void);
+	void search(void) const;
 
   private:
 	int count;
 	Contact contacts[MAX];
-	void display(void);
+	void display(void) const;
 };
 
 #endif /* PHONEBOOK_HPP */
