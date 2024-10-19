@@ -18,10 +18,10 @@
 /*
  To test
 
- diff <(./test | sed 's/^\[[^]]*\] //') <(sed 's/^\[[^]]*\] //' 19920104_091532.log)
-								   
-*/
+ diff <(./test | sed 's/^\[[^]]*\] //') <(sed 's/^\[[^]]*\]
+	//' 19920104_091532.log)
 
+*/
 
 int Account::_nbAccounts(0);
 int Account::_totalAmount(0);
