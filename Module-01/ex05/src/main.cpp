@@ -14,7 +14,7 @@
 
 int	main(void)
 {
-	Harl harl;
+	Harl	harl;
 
 	harl.complain("");
 	harl.complain("QUITE");
