@@ -6,13 +6,13 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/21 09:40:00 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/21 09:49:34 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-const int Fixed::bits_(BITS);
+const int Fixed::bits_(WIDTH);
 
 Fixed::Fixed(void) : value_(0)
 {
