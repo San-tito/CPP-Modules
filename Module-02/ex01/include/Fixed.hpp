@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/21 09:53:11 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/21 10:23:55 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#ifndef FIXED_HPP
+# define FIXED_HPP
 
-int	main(void)
+# define WIDTH 8
+# include <cmath>
+# include <iostream>
+
+class Fixed
 {
-	Fixed	a;
-	Fixed	b(a);
-	Fixed	c;
+  public:
+	Fixed(void);
+	Fixed(const int value);
+	Fixed(const float value);
+	Fixed(const Fixed &fixed);
+	Fixed &operator=(const Fixed &fixed);
+	~Fixed(void);
+	float toFloat(void) const;
+	int toInt(void) const;
+	int getRawBits(void) const;
+	void setRawBits(int const raw);
 
-	c = b;
-	std::cout << a.getRawBits() << std::endl;
-	std::cout << b.getRawBits() << std::endl;
-	std::cout << c.getRawBits() << std::endl;
-	return (0);
-}
+  private:
+	int value_;
+	static const int bits_;
+};
+
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
+
+#endif /* FIXED_HPP */
