@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   bsp.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/23 11:55:13 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/23 11:31:32 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#include "Point.hpp"
+
+bool	bsp(Point const a, Point const b, Point const c, Point const point)
+{
+	// Calculate the area
+}
 
 int	main(void)
 {
-	Fixed	a(5.05f);
-	Fixed b(a);
-
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	a = Fixed(42.42f);
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
+	Point a(0, 0);
+	Point b(a);
+	Point c(1, 1);
+	Point point(0, 0);
+	bool result(bsp(a, b, c, point));
+	std::cout << "The point is " << (result ? "inside" : "outside") << " the triangel\n";
 	return (0);
 }

@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/23 11:55:13 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/23 11:51:16 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#ifndef POINT_HPP
+# define POINT_HPP
 
-int	main(void)
+# include "Fixed.hpp"
+
+class Point
 {
-	Fixed	a(5.05f);
-	Fixed b(a);
+  public:
+	Point(void);
+	Point(const float x, const float y);
+	Point(const Point &point);
+	Point &operator=(const Point &point);
+	~Point(void);
+	const Fixed &getX(void) const;
+	const Fixed &getY(void) const;
 
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	a = Fixed(42.42f);
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	return (0);
-}
+  private:
+	const Fixed x_;
+	const Fixed y_;
+};
+
+#endif /* FIXED_HPP */
