@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/23 11:54:01 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/23 16:54:15 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ Point::Point(const Point &point)
 
 Point &Point::operator=(const Point &point)
 {
+	if (this == &point)
+		return (*this);
+	const_cast<Fixed &>(x_) = point.getX();
+	const_cast<Fixed &>(y_) = point.getY();
 	return (*this);
 }
 
@@ -34,12 +38,12 @@ Point::~Point(void)
 {
 }
 
-const Fixed &Point::getX(void) const
+Fixed &Point::getX(void) const
 {
-	return (x_);
+	return (const_cast<Fixed &>(x_));
 }
 
-const Fixed &Point::getY(void) const
+Fixed &Point::getY(void) const
 {
-	return (y_);
+	return (const_cast<Fixed &>(y_));
 }
