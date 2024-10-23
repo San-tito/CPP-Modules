@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/21 12:10:05 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/23 11:02:45 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Fixed::Fixed(void) : value_(0)
 
 Fixed::Fixed(const int value)
 {
-	value_ = value << bits_;
+	value_ = value * (1 << bits_);
 }
 
 Fixed::Fixed(const float value)
@@ -83,13 +83,15 @@ Fixed &Fixed::operator-(const Fixed &fixed)
 
 Fixed &Fixed::operator*(const Fixed &fixed)
 {
-	value_ *= fixed.toFloat();
+	value_ *= fixed.getRawBits();
+	value_ >>= bits_;
 	return (*this);
 }
 
 Fixed &Fixed::operator/(const Fixed &fixed)
 {
-	value_ /= fixed.toFloat();
+	value_ /= fixed.getRawBits();
+	value_ >>= bits_;
 	return (*this);
 }
 
