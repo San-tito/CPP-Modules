@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/23 11:51:16 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/25 11:11:20 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ class Point
 	Point(const Point &point);
 	Point &operator=(const Point &point);
 	~Point(void);
-	const Fixed &getX(void) const;
-	const Fixed &getY(void) const;
+	Fixed &getX(void) const;
+	Fixed &getY(void) const;
 
   private:
 	const Fixed x_;
