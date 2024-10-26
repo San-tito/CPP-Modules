@@ -1,0 +1,23 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: build and test each module
+      run: |
+          for module in Module-*; do
+            for exercise in $module/ex*; do
+              echo "building $exercise"
+              make -C $exercise
+            done
+          done
