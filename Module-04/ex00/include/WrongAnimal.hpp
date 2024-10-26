@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/26 19:21:23 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/26 19:37:59 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
-Cat::Cat() : Animal("Cat")
-{
-	std::cout << "Cat constructor called\n";
-}
+# include <iostream>
 
-Cat::Cat(const Cat &copy) : Animal(copy)
+class WrongAnimal
 {
-	*this = copy;
-	std::cout << "Cat copy constructor called\n";
-}
+  public:
+	WrongAnimal(void);
+	WrongAnimal(std::string type);
+	WrongAnimal(const WrongAnimal &copy);
+	WrongAnimal &operator=(const WrongAnimal &copy);
+	std::string getType(void) const;
+	virtual ~WrongAnimal(void);
+	virtual void makeSound(void) const;
 
-Cat &Cat::operator=(const Cat &copy)
-{
-	m_type = copy.m_type;
-	return (*this);
-}
+  protected:
+	std::string m_type;
+};
 
-Cat::~Cat()
-{
-	std::cout << "Cat destructor called\n";
-}
-
-void Cat::makeSound() const
-{
-	std::cout << "Miaw Miaw\n";
-}
+#endif /* WRONGANIMAL_HPP */

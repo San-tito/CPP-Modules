@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/09 15:07:57 by sguzman           #+#    #+#              #
-#    Updated: 2024/10/26 12:43:45 by santito          ###   ########.fr        #
+#    Updated: 2024/10/26 19:45:42 by santito          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRCS_PATH    = ./src
 OBJS_PATH    = ./build
 INCLUDE_PATH = ./include
 
-SRCS         = Animal.cpp Cat.cpp Dog.cpp
+SRCS         = Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
 MAIN         = main.cpp
 
 ################################################################################

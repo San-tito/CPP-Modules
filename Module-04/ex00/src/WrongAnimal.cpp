@@ -1,40 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/26 19:21:23 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/26 19:45:24 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "WrongAnimal.hpp"
 
-Cat::Cat() : Animal("Cat")
+WrongAnimal::WrongAnimal()
 {
-	std::cout << "Cat constructor called\n";
+	std::cout << "WrongAnimal constructor called\n";
 }
 
-Cat::Cat(const Cat &copy) : Animal(copy)
+WrongAnimal::WrongAnimal(std::string type) : m_type(type)
 {
-	*this = copy;
-	std::cout << "Cat copy constructor called\n";
+	std::cout << "WrongAnimal argument constructor called\n";
 }
 
-Cat &Cat::operator=(const Cat &copy)
+WrongAnimal::WrongAnimal(const WrongAnimal &copy) : m_type(copy.m_type)
+{
+	std::cout << "WrongAnimal copy constructor called\n";
+}
+
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &copy)
 {
 	m_type = copy.m_type;
 	return (*this);
 }
 
-Cat::~Cat()
+WrongAnimal::~WrongAnimal()
 {
-	std::cout << "Cat destructor called\n";
+	std::cout << "WrongAnimal destructor called\n";
 }
 
-void Cat::makeSound() const
+std::string WrongAnimal::getType() const
 {
-	std::cout << "Miaw Miaw\n";
+	return (m_type);
+}
+
+void WrongAnimal::makeSound() const
+{
 }

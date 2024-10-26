@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/26 19:21:23 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/26 19:46:01 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "WrongCat.hpp"
 
-Cat::Cat() : Animal("Cat")
+WrongCat::WrongCat() : WrongAnimal("WrongCat")
 {
-	std::cout << "Cat constructor called\n";
+	std::cout << "WrongCat constructor called\n";
 }
 
-Cat::Cat(const Cat &copy) : Animal(copy)
+WrongCat::WrongCat(const WrongCat &copy) : WrongAnimal(copy)
 {
 	*this = copy;
-	std::cout << "Cat copy constructor called\n";
+	std::cout << "WrongCat copy constructor called\n";
 }
 
-Cat &Cat::operator=(const Cat &copy)
+WrongCat &WrongCat::operator=(const WrongCat &copy)
 {
 	m_type = copy.m_type;
 	return (*this);
 }
 
-Cat::~Cat()
+WrongCat::~WrongCat()
 {
-	std::cout << "Cat destructor called\n";
+	std::cout << "WrongCat destructor called\n";
 }
 
-void Cat::makeSound() const
+void WrongCat::makeSound() const
 {
 	std::cout << "Miaw Miaw\n";
 }
