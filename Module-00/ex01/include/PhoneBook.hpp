@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 19:59:25 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/27 18:55:33 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/27 19:16:54 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define PHONEBOOK_HPP
 
 # define MAX_CONTACTS 8
-# define WIDTH_COLUMN 10
-# define PROMPT "┌─[phoneBook]\n└─$ "
+# define WIDTH 10
 # include "Contact.hpp"
 # include <iomanip>
 # include <iostream>

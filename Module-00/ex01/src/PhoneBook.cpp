@@ -6,16 +6,16 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/16 20:00:16 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/10/27 19:22:10 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook(void) : count(0)
+PhoneBook::PhoneBook(void) : m_count(0)
 {
-	std::cout << "Welcome to my awesome " << PROGRAM << "!\n";
-	std::cout << "You can store up to " << MAX << " contacts\n";
+	std::cout << "Welcome to my awesome PhoneBook!\n";
+	std::cout << "You can store up to " << MAX_CONTACTS << " contacts\n";
 	std::cout << "Available commands: ADD, SEARCH, EXIT\n";
 }
 
@@ -36,20 +36,15 @@ void PhoneBook::display(void) const
 	std::cout << '|' << std::setw(WIDTH) << truncate("last name");
 	std::cout << '|' << std::setw(WIDTH) << truncate("nickname");
 	std::cout << '|' << '\n';
-	for (int i(0); i < count; i++)
+	for (int i(0); i < m_count; i++)
 	{
 		std::cout << '|' << std::setw(WIDTH) << i;
-		std::cout << '|' << std::setw(WIDTH) << truncate(contacts[i].getFirstName());
-		std::cout << '|' << std::setw(WIDTH) << truncate(contacts[i].getLastName());
-		std::cout << '|' << std::setw(WIDTH) << truncate(contacts[i].getNickname());
+		std::cout << '|' << std::setw(WIDTH) << truncate(m_contacts[i].getFirstName());
+		std::cout << '|' << std::setw(WIDTH) << truncate(m_contacts[i].getLastName());
+		std::cout << '|' << std::setw(WIDTH) << truncate(m_contacts[i].getNickname());
 		std::cout << '|' << '\n';
 	}
 	std::cout << '\n';
-}
-
-inline void	ignoreLine(void)
-{
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 int	getIndex(void)
@@ -58,27 +53,29 @@ int	getIndex(void)
 
 	std::cout << " [index]> ";
 	std::cin >> index;
-	bool success(std::cin);
+	bool fail(std::cin.fail());
+	if (std::cin.eof())
+		return (-1);
 	std::cin.clear();
-	ignoreLine();
-	return ((success) ? index : -1);
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	return ((fail) ? -1 : index);
 }
 
 void PhoneBook::search(void) const
 {
 	int index;
 
-	if (count == 0)
-	{
-		std::cerr << PROGRAM << ": phonebook is empty\n";
-		return ;
-	}
-	display();
-	index = getIndex();
-	if (index < 0 || index >= count)
-		std::cerr << PROGRAM << ": invalid index\n";
+	if (m_count == 0)
+		std::cerr << "phonebook is empty\n";
 	else
-		contacts[index].displayDetails();
+	{
+		display();
+		index = getIndex();
+		if (0 <= index && index < m_count)
+			m_contacts[index].displayDetails();
+		else if (std::cin.eof() == 0)
+			std::cerr << "invalid index\n";
+	}
 }
 
 std::string getField(const std::string &field)
@@ -86,8 +83,10 @@ std::string getField(const std::string &field)
 	std::string input;
 	std::cout << " [" << field << "]: ";
 	std::getline(std::cin, input);
+	if (std::cin.fail())
+		return ("");
 	if (input.empty())
-		std::cerr << PROGRAM << ": " << field << " cannot be empty\n";
+		std::cerr << field << " cannot be empty\n";
 	return (input);
 }
 
@@ -116,12 +115,12 @@ void PhoneBook::add(void)
 	if (field.empty())
 		return ;
 	contact.setSecret(field);
-	if (count == MAX)
+	if (m_count == MAX_CONTACTS)
 	{
-		for (int i(1); i < MAX; i++)
-			contacts[i - 1] = contacts[i];
-		contacts[MAX - 1] = contact;
+		for (int i(1); i < MAX_CONTACTS; i++)
+			m_contacts[i - 1] = m_contacts[i];
+		m_contacts[MAX_CONTACTS - 1] = contact;
 	}
 	else
-		contacts[count++] = contact;
+		m_contacts[m_count++] = contact;
 }

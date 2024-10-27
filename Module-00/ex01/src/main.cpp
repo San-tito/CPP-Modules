@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:57:51 by sguzman           #+#    #+#             */
-/*   Updated: 2024/09/10 19:13:29 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/10/27 19:16:49 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 int	main(void)
 {
-	PhoneBook	phoneBook;
+	PhoneBook	book;
 
-	std::string command("");
+	std::string command;
 	do
 	{
+		std::cerr << "┌─[phoneBook]\n└─$ ";
+		std::getline(std::cin, command);
 		if (command == "ADD")
-			phoneBook.add();
+			book.add();
 		else if (command == "SEARCH")
-			phoneBook.search();
+			book.search();
 		else if (command == "EXIT")
-			break ;
-		std::cout << "$ ";
-	} while (std::getline(std::cin, command));
+			return (std::cin.fail());
+	} while (std::cin.good());
+	std::cerr << '\n';
 	return (std::cin.fail());
 }

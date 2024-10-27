@@ -6,14 +6,14 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:50 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/16 20:00:48 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/10/27 19:26:05 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
-Contact::Contact(void) : first_name_(""), last_name_(""), nickname_(""),
-	phone_(""), secret_("")
+Contact::Contact(void) : m_first_name(""), m_last_name(""), m_nickname(""),
+	m_phone(""), m_secret("")
 {
 }
 
@@ -23,59 +23,49 @@ Contact::~Contact(void)
 
 std::string Contact::getFirstName(void) const
 {
-	return (first_name_);
+	return (m_first_name);
 }
 
 void Contact::setFirstName(std::string first_name)
 {
-	first_name_ = first_name;
+	m_first_name = first_name;
 }
 
 std::string Contact::getLastName(void) const
 {
-	return (last_name_);
+	return (m_last_name);
 }
 
 void Contact::setLastName(std::string last_name)
 {
-	last_name_ = last_name;
+	m_last_name = last_name;
 }
 
 std::string Contact::getNickname(void) const
 {
-	return (nickname_);
+	return (m_nickname);
 }
 
 void Contact::setNickname(std::string nickname)
 {
-	nickname_ = nickname;
-}
-
-std::string Contact::getPhone(void) const
-{
-	return (phone_);
+	m_nickname = nickname;
 }
 
 void Contact::setPhone(std::string phone)
 {
-	phone_ = phone;
-}
-
-std::string Contact::getSecret(void) const
-{
-	return (secret_);
+	m_phone = phone;
 }
 
 void Contact::setSecret(std::string secret)
 {
-	secret_ = secret;
+	m_secret = secret;
 }
 
 void Contact::displayDetails(void) const
 {
-	std::cout << "First Name: " << first_name_ << '\n';
-	std::cout << "Last Name: " << last_name_ << '\n';
-	std::cout << "Nickname: " << nickname_ << '\n';
-	std::cout << "Phone Number: " << phone_ << '\n';
-	std::cout << "Darkest Secret: " << secret_ << '\n';
+	std::cout << "First Name: " << m_first_name << '\n';
+	std::cout << "Last Name: " << m_last_name << '\n';
+	std::cout << "Nickname: " << m_nickname << '\n';
+	std::cout << "Phone Number: " << m_phone << '\n';
+	std::cout << "Darkest Secret: " << m_secret << '\n';
 }
