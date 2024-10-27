@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/26 22:21:14 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/27 20:11:07 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 	Zombie *murphy(newZombie("Murphy"));
 	randomChump("Billy");
 	murphy->announce();
-	ed.announce();
 	delete (murphy);
+	ed.announce();
 	return (0);
 }
