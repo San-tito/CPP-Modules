@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:16:09 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/20 19:11:32 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/27 21:00:28 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int	replace(std::string filename, std::string s1, std::string s2)
 		{
 			while ((found = line.find(s1)) != std::string::npos)
 			{
-				if (s1.empty())
-					break ;
 				line.erase(found, s1.length());
 				line.insert(found, s2);
 			}
@@ -57,5 +55,11 @@ int	main(int argc, char **argv)
 		std::cerr << "Usage: " << *argv << " <filename> <s1> <s2>\n";
 		return (1);
 	}
-	return (replace(argv[1], argv[2], argv[3]));
+	std::string s1(argv[2]);
+	if (s1.empty())
+	{
+		std::cerr << "Error: The string to be replaced (s1) cannot be empty.\n";
+		return (1);
+	}
+	return (replace(argv[1], s1, argv[3]));
 }

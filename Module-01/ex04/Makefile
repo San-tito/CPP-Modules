@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/09 15:07:57 by sguzman           #+#    #+#              #
-#    Updated: 2024/10/20 19:07:21 by santito          ###   ########.fr        #
+#    Updated: 2024/10/27 21:00:42 by santito          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #                                     CONFIG                                   #
 ################################################################################
 
-NAME        = program
+NAME        = replace
 CC          = c++
 CFLAGS      = -Wall -Wextra -Werror -std=c++98
 DFLAGS      = -MMD -MF $(@:.o=.d)
