@@ -6,16 +6,16 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 19:59:25 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/16 18:39:01 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/10/27 18:55:33 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-# define MAX 8
-# define WIDTH 10
-# define PROGRAM "phonebook"
+# define MAX_CONTACTS 8
+# define WIDTH_COLUMN 10
+# define PROMPT "┌─[phoneBook]\n└─$ "
 # include "Contact.hpp"
 # include <iomanip>
 # include <iostream>
@@ -30,8 +30,8 @@ class PhoneBook
 	void search(void) const;
 
   private:
-	int count;
-	Contact contacts[MAX];
+	int m_count;
+	Contact m_contacts[MAX_CONTACTS];
 	void display(void) const;
 };
 
