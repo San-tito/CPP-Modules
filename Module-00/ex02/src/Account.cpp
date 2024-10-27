@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/16 20:00:16 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/10/27 19:42:32 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 #include <ctime>
 #include <iomanip>
 #include <iostream>
-
-/*
- To test
-
- ./test | sed 's/^\[[^]]*\] //'
-
-*/
 
 int Account::_nbAccounts(0);
 int Account::_totalAmount(0);
