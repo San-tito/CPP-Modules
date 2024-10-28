@@ -6,41 +6,39 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/21 11:24:46 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/28 09:07:49 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-const int Fixed::bits_(WIDTH);
+const int Fixed::m_fractionalBits(FRACTIONAL_BITS);
 
-Fixed::Fixed(void) : value_(0)
+Fixed::Fixed(void) : m_value(0)
 {
 	std::cout << "Default constructor called\n";
 }
 
-Fixed::Fixed(const int value)
+Fixed::Fixed(const int value) : m_value(value << m_fractionalBits)
 {
 	std::cout << "Int constructor called\n";
-	value_ = value << bits_;
 }
 
-Fixed::Fixed(const float value)
+Fixed::Fixed(const float value) : m_value(roundf(value
+		* (1 << m_fractionalBits)))
 {
 	std::cout << "Float constructor called\n";
-	value_ = roundf(value * (1 << bits_));
 }
 
-Fixed::Fixed(const Fixed &fixed)
+Fixed::Fixed(const Fixed &other) : m_value(other.getRawBits())
 {
 	std::cout << "Copy constructor called\n";
-	*this = fixed;
 }
 
-Fixed &Fixed::operator=(const Fixed &fixed)
+Fixed &Fixed::operator=(const Fixed &other)
 {
 	std::cout << "Copy assignment operator called\n";
-	value_ = fixed.getRawBits();
+	m_value = other.getRawBits();
 	return (*this);
 }
 
@@ -50,7 +48,6 @@ std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 	return (out);
 }
 
-
 Fixed::~Fixed(void)
 {
 	std::cout << "Destructor called\n";
@@ -58,22 +55,20 @@ Fixed::~Fixed(void)
 
 float Fixed::toFloat(void) const
 {
-	return (static_cast<float>(value_) / (1 << bits_));
+	return (static_cast<float>(m_value) / (1 << m_fractionalBits));
 }
 
 int Fixed::toInt(void) const
 {
-	return (value_ >> bits_);
+	return (m_value >> m_fractionalBits);
 }
 
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called\n";
-	return (value_);
+	return (m_value);
 }
 
 void Fixed::setRawBits(int const raw)
 {
-	std::cout << "setRawBits member function called\n";
-	value_ = raw;
+	m_value = raw;
 }
