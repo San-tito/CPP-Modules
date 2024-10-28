@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/09 15:07:57 by sguzman           #+#    #+#              #
-#    Updated: 2024/10/25 20:04:02 by santito          ###   ########.fr        #
+#    Updated: 2024/10/28 12:20:51 by santito          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #                                     CONFIG                                   #
 ################################################################################
 
-NAME        = program
+NAME        = claptrap
 CC          = c++
 CFLAGS      = -Wall -Wextra -Werror -std=c++98
 DFLAGS      = -MMD -MF $(@:.o=.d)
