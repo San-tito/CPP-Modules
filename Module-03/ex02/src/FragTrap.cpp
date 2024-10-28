@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/28 11:49:26 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/28 11:55:16 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ FragTrap::FragTrap(const std::string &name) : ClapTrap(name)
 	std::cout << "FragTrap constructor called for " << m_name << "\n";
 }
 
-FragTrap::~FragTrap()
+FragTrap::~FragTrap(void)
 {
 	std::cout << "FragTrap destructor called for " << m_name << "\n";
 }

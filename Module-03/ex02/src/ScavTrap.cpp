@@ -6,13 +6,13 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/28 11:32:10 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/28 11:55:42 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap("DefaultScav")
+ScavTrap::ScavTrap(void) : ClapTrap("DefaultScav")
 {
 	m_hitPoints = 100;
 	m_energyPoints = 50;
@@ -28,7 +28,7 @@ ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name)
 	std::cout << "ScavTrap constructor called for " << m_name << "\n";
 }
 
-ScavTrap::~ScavTrap()
+ScavTrap::~ScavTrap(void)
 {
 	std::cout << "ScavTrap destructor called for " << m_name << "\n";
 }
@@ -42,9 +42,7 @@ void ScavTrap::attack(const std::string &target)
 		m_energyPoints--;
 	}
 	else
-	{
 		std::cout << "ScavTrap " << m_name << " has no energy left to attack!\n";
-	}
 }
 
 void ScavTrap::guardGate()
