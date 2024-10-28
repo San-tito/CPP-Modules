@@ -6,61 +6,48 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/25 19:51:15 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/28 11:32:10 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(void) : ClapTrap()
+ScavTrap::ScavTrap() : ClapTrap("DefaultScav")
 {
-	hit_points_ = 100;
-	energy_points_ = 50;
-	attack_damage_ = 20;
-	std::cout << "ScavTrap " << name_ << " created!\n";
+	m_hitPoints = 100;
+	m_energyPoints = 50;
+	m_attackDamage = 20;
+	std::cout << "ScavTrap Default constructor called for " << m_name << "\n";
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name)
 {
-	hit_points_ = 100;
-	energy_points_ = 50;
-	attack_damage_ = 20;
-	std::cout << "ScavTrap " << name_ << " created!\n";
+	m_hitPoints = 100;
+	m_energyPoints = 50;
+	m_attackDamage = 20;
+	std::cout << "ScavTrap constructor called for " << m_name << "\n";
 }
 
-ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap(copy.name_)
+ScavTrap::~ScavTrap()
 {
-	*this = copy;
-}
-
-ScavTrap &ScavTrap::operator=(const ScavTrap &copy)
-{
-	name_ = copy.name_;
-	hit_points_ = copy.hit_points_;
-	energy_points_ = copy.energy_points_;
-	attack_damage_ = copy.attack_damage_;
-	return (*this);
-}
-
-ScavTrap::~ScavTrap(void)
-{
-	std::cout << "ScavTrap " << name_ << " destroyed!\n";
+	std::cout << "ScavTrap destructor called for " << m_name << "\n";
 }
 
 void ScavTrap::attack(const std::string &target)
 {
-	if (energy_points_ > 0)
+	if (m_energyPoints > 0)
 	{
-		std::cout << "ScavTrap " << name_ << " attacks ";
-		std::cout << target << ", causing " << attack_damage_;
-		std::cout << " points of damage !\n";
-		energy_points_--;
+		std::cout << "ScavTrap " << m_name << " attacks " << target;
+		std::cout << ", causing " << m_attackDamage << " points of damage !\n";
+		m_energyPoints--;
 	}
 	else
-		std::cout << "ClapTrap " << name_ << " out of Energy!\n";
+	{
+		std::cout << "ScavTrap " << m_name << " has no energy left to attack!\n";
+	}
 }
 
-void ScavTrap::guardGate(void)
+void ScavTrap::guardGate()
 {
-	std::cout << "ScavTrap " << name_ << " have enterred in Gate keeper mode\n";
+	std::cout << "ScavTrap " << m_name << " is now in Gatekeeper mode!\n";
 }
