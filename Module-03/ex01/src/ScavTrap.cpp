@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/28 11:32:10 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/28 11:54:06 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ void ScavTrap::attack(const std::string &target)
 		m_energyPoints--;
 	}
 	else
-	{
 		std::cout << "ScavTrap " << m_name << " has no energy left to attack!\n";
-	}
 }
 
 void ScavTrap::guardGate()

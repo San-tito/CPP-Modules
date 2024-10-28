@@ -6,14 +6,14 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/28 11:19:26 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/28 11:53:56 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : m_name("Default"), m_hitPoints(10), m_energyPoints(10),
-	m_attackDamage(0)
+ClapTrap::ClapTrap(void) : m_name("Default"), m_hitPoints(10),
+	m_energyPoints(10), m_attackDamage(0)
 {
 	std::cout << "ClapTrap Default constructor called for " << m_name << "\n";
 }
@@ -40,7 +40,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 	return (*this);
 }
 
-ClapTrap::~ClapTrap()
+ClapTrap::~ClapTrap(void)
 {
 	std::cout << "ClapTrap destructor called for " << m_name << "\n";
 }
@@ -81,7 +81,5 @@ void ClapTrap::beRepaired(unsigned int amount)
 		std::cout << amount << " hit points. Total hit points: " << m_hitPoints << "\n";
 	}
 	else
-	{
 		std::cout << "ClapTrap " << m_name << " has no energy left to repair!\n";
-	}
 }
