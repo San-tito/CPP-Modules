@@ -6,33 +6,33 @@
 /*   by: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/28 10:43:06 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/28 10:53:09 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
 
-float	area(Point const &a, Point const &b, Point const &c)
+Fixed	area(Point const &a, Point const &b, Point const &c)
 {
-	Fixed	computed;
-
 	Fixed ax(a.getX());
 	Fixed ay(a.getY());
 	Fixed bx(b.getX());
 	Fixed by(b.getY());
 	Fixed cx(c.getX());
 	Fixed cy(c.getY());
-	computed = ax * (by - cy) + bx * (cy - ay) + cx * (ay - by);
-	return (computed < Fixed(0)) ? -computed.toFloat() : computed.toFloat();
+	Fixed computed(ax * (by - cy) + bx * (cy - ay) + cx * (ay - by));
+	return ((computed < Fixed(0)) ? Fixed(-1) * computed : computed);
 }
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point)
 {
-	float abc(area(a, b, c));
-	float pbc(area(point, b, c));
-	float pac(area(point, a, c));
-	float pab(area(point, a, b));
-	return (abc == (pbc + pac + pab)) && (pbc > 0) && (pac > 0) && (pab > 0);
+	Fixed zero(0);
+	Fixed abc(area(a, b, c));
+	Fixed pbc(area(point, b, c));
+	Fixed pac(area(point, a, c));
+	Fixed pab(area(point, a, b));
+	return (abc == (pbc + pac + pab)) && (pbc > zero) && (pac > zero)
+		&& (pab > zero);
 }
 
 int	main(void)
