@@ -6,32 +6,24 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:16:09 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/20 22:00:25 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/28 08:41:04 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
-Harl::Harl(void)
-{
-}
-
-Harl::~Harl(void)
-{
-}
-
 void Harl::debug(void)
 {
 	std::cout << "[ DEBUG ]\n"
-				<< "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. "
-				<< "I really do!\n";
+				<< "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger."
+				<< " I really do!\n";
 }
 
 void Harl::info(void)
 {
 	std::cout << "[ INFO ]\n"
 				<< "I cannot believe adding extra bacon costs more money.\n"
-				<< "You didn’t put enough bacon in my burger! "
+				<< "You didn’t put enough bacon in my burger!\n"
 				<< "If you did, I wouldn’t be asking for more!\n";
 }
 
@@ -50,13 +42,11 @@ void Harl::error(void)
 
 void Harl::complain(std::string level)
 {
-	int			i;
-	const int	size = 4;
+	int	index;
 
-	const std::string levels[size] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-	for (i = 0; i < size && level != levels[i]; i++)
-		;
-	switch (i)
+	index = (level == "DEBUG") ? 0 : (level == "INFO") ? 1 : (level == "WARNING") ? 2 : (level == "ERROR") ? 3 :
+		-1;
+	switch (index)
 	{
 	case 0:
 		debug();
