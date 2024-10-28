@@ -6,31 +6,27 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/23 16:54:15 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/10/28 10:11:57 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
 
-Point::Point(void) : x_(0), y_(0)
+Point::Point(void) : m_x(0), m_y(0)
 {
 }
 
-Point::Point(const float x, const float y) : x_(x), y_(y)
+Point::Point(const float x, const float y) : m_x(x), m_y(y)
 {
 }
 
-Point::Point(const Point &point)
+Point::Point(const Point &other) : m_x(other.m_x), m_y(other.m_y)
 {
-	*this = point;
 }
 
-Point &Point::operator=(const Point &point)
+Point &Point::operator=(const Point &other)
 {
-	if (this == &point)
-		return (*this);
-	const_cast<Fixed &>(x_) = point.getX();
-	const_cast<Fixed &>(y_) = point.getY();
+	static_cast<void>(other);
 	return (*this);
 }
 
@@ -38,12 +34,12 @@ Point::~Point(void)
 {
 }
 
-Fixed &Point::getX(void) const
+Fixed Point::getX(void) const
 {
-	return (const_cast<Fixed &>(x_));
+	return (m_x);
 }
 
-Fixed &Point::getY(void) const
+Fixed Point::getY(void) const
 {
-	return (const_cast<Fixed &>(y_));
+	return (m_y);
 }
