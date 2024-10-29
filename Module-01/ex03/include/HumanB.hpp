@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:16:09 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/27 20:51:05 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/29 16:46:43 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class HumanB
 
   private:
 	std::string m_name;
-	Weapon *m_pweapon;
+	Weapon *m_pWeapon;
 };
 
 #endif /* HUMANB_HPP */
