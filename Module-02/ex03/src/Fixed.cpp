@@ -6,35 +6,35 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/28 09:56:10 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/30 10:55:52 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-const int Fixed::m_fractionalBits = FRACTIONAL_BITS;
+const int Fixed::fractional_bits_ = FRACTIONAL_BITS;
 
-Fixed::Fixed(void) : m_value(0)
+Fixed::Fixed(void) : value_(0)
 {
 }
 
-Fixed::Fixed(const Fixed &other) : m_value(other.getRawBits())
+Fixed::Fixed(const Fixed &other) : value_(other.getRawBits())
 {
 }
 
 Fixed::Fixed(const int value)
 {
-	m_value = value << m_fractionalBits;
+	value_ = value << fractional_bits_;
 }
 
 Fixed::Fixed(const float value)
 {
-	m_value = roundf(value * (1 << m_fractionalBits));
+	value_ = roundf(value * (1 << fractional_bits_));
 }
 
 Fixed &Fixed::operator=(const Fixed &other)
 {
-	m_value = other.getRawBits();
+	value_ = other.getRawBits();
 	return (*this);
 }
 
@@ -44,85 +44,85 @@ Fixed::~Fixed(void)
 
 int Fixed::getRawBits(void) const
 {
-	return (m_value);
+	return (value_);
 }
 
 void Fixed::setRawBits(int const raw)
 {
-	m_value = raw;
+	value_ = raw;
 }
 
 float Fixed::toFloat(void) const
 {
-	return (static_cast<float>(m_value) / (1 << m_fractionalBits));
+	return (static_cast<float>(value_) / (1 << fractional_bits_));
 }
 
 int Fixed::toInt(void) const
 {
-	return (m_value >> m_fractionalBits);
+	return (value_ >> fractional_bits_);
 }
 
 bool Fixed::operator>(const Fixed &other) const
 {
-	return (m_value > other.m_value);
+	return (value_ > other.value_);
 }
 
 bool Fixed::operator<(const Fixed &other) const
 {
-	return (m_value < other.m_value);
+	return (value_ < other.value_);
 }
 
 bool Fixed::operator>=(const Fixed &other) const
 {
-	return (m_value >= other.m_value);
+	return (value_ >= other.value_);
 }
 
 bool Fixed::operator<=(const Fixed &other) const
 {
-	return (m_value <= other.m_value);
+	return (value_ <= other.value_);
 }
 
 bool Fixed::operator==(const Fixed &other) const
 {
-	return (m_value == other.m_value);
+	return (value_ == other.value_);
 }
 
 bool Fixed::operator!=(const Fixed &other) const
 {
-	return (m_value != other.m_value);
+	return (value_ != other.value_);
 }
 
 Fixed Fixed::operator+(const Fixed &other) const
 {
 	Fixed result;
-	result.setRawBits(m_value + other.m_value);
+	result.setRawBits(value_ + other.value_);
 	return (result);
 }
 
 Fixed Fixed::operator-(const Fixed &other) const
 {
 	Fixed result;
-	result.setRawBits(m_value - other.m_value);
+	result.setRawBits(value_ - other.value_);
 	return (result);
 }
 
 Fixed Fixed::operator*(const Fixed &other) const
 {
 	Fixed result;
-	result.setRawBits((m_value * other.m_value) >> m_fractionalBits);
+	result.setRawBits((value_ * other.value_) >> fractional_bits_);
 	return (result);
 }
 
 Fixed Fixed::operator/(const Fixed &other) const
 {
 	Fixed result;
-	result.setRawBits((m_value << m_fractionalBits) / other.m_value);
+	result.setRawBits((value_ << fractional_bits_) / other.value_);
 	return (result);
 }
 
 Fixed &Fixed::operator++()
 {
-	m_value += 1;
+	value_ += 1;
 	return (*this);
 }
 
@@ -135,7 +135,7 @@ Fixed Fixed::operator++(int)
 
 Fixed &Fixed::operator--()
 {
-	m_value -= 1;
+	value_ -= 1;
 	return (*this);
 }
 

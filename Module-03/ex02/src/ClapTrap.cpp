@@ -6,80 +6,80 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/28 11:55:02 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/30 11:01:03 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(void) : m_name("Default"), m_hitPoints(10),
-	m_energyPoints(10), m_attackDamage(0)
+ClapTrap::ClapTrap(void) : name_("Default"), hit_points_(10),
+	energy_points_(10), attack_damage_(0)
 {
-	std::cout << "ClapTrap Default constructor called for " << m_name << "\n";
+	std::cout << "ClapTrap Default constructor called for " << name_ << "\n";
 }
 
-ClapTrap::ClapTrap(const std::string &name) : m_name(name), m_hitPoints(10),
-	m_energyPoints(10), m_attackDamage(0)
+ClapTrap::ClapTrap(const std::string &name) : name_(name), hit_points_(10),
+	energy_points_(10), attack_damage_(0)
 {
-	std::cout << "ClapTrap constructor called for " << m_name << "\n";
+	std::cout << "ClapTrap constructor called for " << name_ << "\n";
 }
 
-ClapTrap::ClapTrap(const ClapTrap &other) : m_name(other.m_name),
-	m_hitPoints(other.m_hitPoints), m_energyPoints(other.m_energyPoints),
-	m_attackDamage(other.m_attackDamage)
+ClapTrap::ClapTrap(const ClapTrap &other) : name_(other.name_),
+	hit_points_(other.hit_points_), energy_points_(other.energy_points_),
+	attack_damage_(other.attack_damage_)
 {
-	std::cout << "ClapTrap copy constructor called for " << m_name << "\n";
+	std::cout << "ClapTrap copy constructor called for " << name_ << "\n";
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
-	m_name = other.m_name;
-	m_hitPoints = other.m_hitPoints;
-	m_energyPoints = other.m_energyPoints;
-	m_attackDamage = other.m_attackDamage;
+	name_ = other.name_;
+	hit_points_ = other.hit_points_;
+	energy_points_ = other.energy_points_;
+	attack_damage_ = other.attack_damage_;
 	return (*this);
 }
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "ClapTrap destructor called for " << m_name << "\n";
+	std::cout << "ClapTrap destructor called for " << name_ << "\n";
 }
 
 void ClapTrap::attack(const std::string &target)
 {
-	if (m_energyPoints > 0)
+	if (energy_points_ > 0)
 	{
-		std::cout << "ClapTrap " << m_name << " attacks " << target;
-		std::cout << ", causing " << m_attackDamage << " points of damage !\n";
-		m_energyPoints--;
+		std::cout << "ClapTrap " << name_ << " attacks " << target;
+		std::cout << ", causing " << attack_damage_ << " points of damage !\n";
+		energy_points_--;
 	}
 	else
-		std::cout << "ClapTrap " << m_name << " has no energy left to attack!\n";
+		std::cout << "ClapTrap " << name_ << " has no energy left to attack!\n";
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (amount >= m_hitPoints)
+	if (amount >= hit_points_)
 	{
-		m_hitPoints = 0;
-		std::cout << "ClapTrap " << m_name << " has taken too much damage and is destroyed!\n";
+		hit_points_ = 0;
+		std::cout << "ClapTrap " << name_ << " has taken too much damage and is destroyed!\n";
 	}
 	else
 	{
-		m_hitPoints -= amount;
-		std::cout << "ClapTrap " << m_name << " now has " << m_hitPoints << " hit points left.\n";
+		hit_points_ -= amount;
+		std::cout << "ClapTrap " << name_ << " now has " << hit_points_ << " hit points left.\n";
 	}
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (m_energyPoints > 0)
+	if (energy_points_ > 0)
 	{
-		m_hitPoints += amount;
-		m_energyPoints--;
-		std::cout << "ClapTrap " << m_name << " repairs itself, restoring ";
-		std::cout << amount << " hit points. Total hit points: " << m_hitPoints << "\n";
+		hit_points_ += amount;
+		energy_points_--;
+		std::cout << "ClapTrap " << name_ << " repairs itself, restoring ";
+		std::cout << amount << " hit points. Total hit points: " << hit_points_ << "\n";
 	}
 	else
-		std::cout << "ClapTrap " << m_name << " has no energy left to repair!\n";
+		std::cout << "ClapTrap " << name_ << " has no energy left to repair!\n";
 }
