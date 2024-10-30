@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:16:09 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/29 16:46:43 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/10/30 10:49:55 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ class HumanB
 	void attack(void) const;
 
   private:
-	std::string m_name;
-	Weapon *m_pWeapon;
+	std::string name_;
+	Weapon *weapon_;
 };
 
 #endif /* HUMANB_HPP */

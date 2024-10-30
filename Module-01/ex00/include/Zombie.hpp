@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/27 20:11:29 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/30 10:44:56 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Zombie
 	void announce(void) const;
 
   private:
-	std::string m_name;
+	std::string name_;
 };
 
 Zombie	*newZombie(std::string name);
