@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/26 19:52:21 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/30 11:36:05 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ class WrongAnimal
 {
   public:
 	WrongAnimal(void);
-	WrongAnimal(std::string type);
-	WrongAnimal(const WrongAnimal &copy);
-	WrongAnimal &operator=(const WrongAnimal &copy);
-	std::string getType(void) const;
+	WrongAnimal(const WrongAnimal &other);
+	WrongAnimal &operator=(const WrongAnimal &other);
 	~WrongAnimal(void);
-	void makeSound(void) const;
+
+	void makeSound() const;
+	std::string getType() const;
 
   protected:
-	std::string m_type;
+	std::string type_;
 };
 
 #endif /* WRONGANIMAL_HPP */

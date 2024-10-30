@@ -6,35 +6,24 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/26 19:19:19 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/30 11:31:52 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 
-Dog::Dog() : Animal("Dog")
+Dog::Dog(void)
 {
-	std::cout << "Dog constructor called\n";
+	type_ = "Dog";
+	std::cout << "Dog constructed\n";
 }
 
-Dog::Dog(const Dog &copy) : Animal(copy)
+Dog::~Dog(void)
 {
-	*this = copy;
-	std::cout << "Dog copy constructor called\n";
+	std::cout << "Dog destructed\n";
 }
 
-Dog &Dog::operator=(const Dog &copy)
+void Dog::makeSound(void) const
 {
-	m_type = copy.m_type;
-	return (*this);
-}
-
-Dog::~Dog()
-{
-	std::cout << "Dog destructor called\n";
-}
-
-void Dog::makeSound() const
-{
-	std::cout << "Woof Woof\n";
+	std::cout << "Woof!\n";
 }

@@ -6,35 +6,24 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/26 19:46:01 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/30 11:38:33 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongCat.hpp"
 
-WrongCat::WrongCat() : WrongAnimal("WrongCat")
+WrongCat::WrongCat(void)
 {
-	std::cout << "WrongCat constructor called\n";
+	type_ = "WrongCat";
+	std::cout << "WrongCat constructed\n";
 }
 
-WrongCat::WrongCat(const WrongCat &copy) : WrongAnimal(copy)
+WrongCat::~WrongCat(void)
 {
-	*this = copy;
-	std::cout << "WrongCat copy constructor called\n";
+	std::cout << "WrongCat destructed\n";
 }
 
-WrongCat &WrongCat::operator=(const WrongCat &copy)
+void WrongCat::makeSound(void) const
 {
-	m_type = copy.m_type;
-	return (*this);
-}
-
-WrongCat::~WrongCat()
-{
-	std::cout << "WrongCat destructor called\n";
-}
-
-void WrongCat::makeSound() const
-{
-	std::cout << "Miaw Miaw\n";
+	std::cout << "WrongMeow!\n";
 }

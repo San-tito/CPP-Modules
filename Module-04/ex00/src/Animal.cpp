@@ -6,43 +6,39 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/26 19:20:37 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/30 11:13:28 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 
-Animal::Animal()
+Animal::Animal(void) : type_("")
 {
-	std::cout << "Animal constructor called\n";
+	std::cout << "Animal constructed\n";
 }
 
-Animal::Animal(std::string type) : m_type(type)
+Animal::Animal(const Animal &other) : type_(other.type_)
 {
-	std::cout << "Animal argument constructor called\n";
+	std::cout << "Animal copy-constructed\n";
 }
 
-Animal::Animal(const Animal &copy) : m_type(copy.m_type)
+Animal &Animal::operator=(const Animal &other)
 {
-	std::cout << "Animal copy constructor called\n";
-}
-
-Animal &Animal::operator=(const Animal &copy)
-{
-	m_type = copy.m_type;
+	type_ = other.type_;
 	return (*this);
 }
 
 Animal::~Animal()
 {
-	std::cout << "Animal destructor called\n";
-}
-
-std::string Animal::getType() const
-{
-	return (m_type);
+	std::cout << "Animal destructed\n";
 }
 
 void Animal::makeSound() const
 {
+	std::cout << "Animal sound!\n";
+}
+
+std::string Animal::getType() const
+{
+	return (type_);
 }

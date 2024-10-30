@@ -6,43 +6,39 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/26 19:45:24 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/30 11:37:47 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal()
+WrongAnimal::WrongAnimal(void) : type_("")
 {
-	std::cout << "WrongAnimal constructor called\n";
+	std::cout << "WrongAnimal constructed\n";
 }
 
-WrongAnimal::WrongAnimal(std::string type) : m_type(type)
+WrongAnimal::WrongAnimal(const WrongAnimal &other) : type_(other.type_)
 {
-	std::cout << "WrongAnimal argument constructor called\n";
+	std::cout << "WrongAnimal copy-constructed\n";
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal &copy) : m_type(copy.m_type)
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other)
 {
-	std::cout << "WrongAnimal copy constructor called\n";
-}
-
-WrongAnimal &WrongAnimal::operator=(const WrongAnimal &copy)
-{
-	m_type = copy.m_type;
+	type_ = other.type_;
 	return (*this);
 }
 
 WrongAnimal::~WrongAnimal()
 {
-	std::cout << "WrongAnimal destructor called\n";
-}
-
-std::string WrongAnimal::getType() const
-{
-	return (m_type);
+	std::cout << "WrongAnimal destructed\n";
 }
 
 void WrongAnimal::makeSound() const
 {
+	std::cout << "WrongAnimal sound!\n";
+}
+
+std::string WrongAnimal::getType() const
+{
+	return (type_);
 }

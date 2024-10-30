@@ -6,35 +6,24 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/26 19:21:23 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/30 11:30:39 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat() : Animal("Cat")
+Cat::Cat(void)
 {
-	std::cout << "Cat constructor called\n";
+	type_ = "Cat";
+	std::cout << "Cat constructed\n";
 }
 
-Cat::Cat(const Cat &copy) : Animal(copy)
+Cat::~Cat(void)
 {
-	*this = copy;
-	std::cout << "Cat copy constructor called\n";
+	std::cout << "Cat destructed\n";
 }
 
-Cat &Cat::operator=(const Cat &copy)
+void Cat::makeSound(void) const
 {
-	m_type = copy.m_type;
-	return (*this);
-}
-
-Cat::~Cat()
-{
-	std::cout << "Cat destructor called\n";
-}
-
-void Cat::makeSound() const
-{
-	std::cout << "Miaw Miaw\n";
+	std::cout << "Meow!\n";
 }

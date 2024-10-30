@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/26 19:52:30 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/30 11:39:38 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ class WrongCat : public WrongAnimal
 {
   public:
 	WrongCat(void);
-	WrongCat(const WrongCat &copy);
-	WrongCat &operator=(const WrongCat &copy);
 	~WrongCat(void);
+
 	void makeSound(void) const;
 };
 
