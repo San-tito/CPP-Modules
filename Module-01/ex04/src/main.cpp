@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:16:09 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/30 10:51:44 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/31 10:52:41 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ int	replace(std::string filename, std::string s1, std::string s2)
 		std::string line;
 		while (std::getline(file, line))
 		{
-			while ((found = line.find(s1)) != std::string::npos)
+			found = 0;
+			while ((found = line.find(s1, found)) != std::string::npos)
 			{
 				line.erase(found, s1.length());
 				line.insert(found, s2);
+				found += s2.length();
 			}
 			output << line << '\n';
 		}
