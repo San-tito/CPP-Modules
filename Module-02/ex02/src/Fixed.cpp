@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/30 10:55:22 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/31 14:45:24 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Fixed::Fixed(void) : value_(0)
 {
 }
 
-Fixed::Fixed(const Fixed &other) : value_(other.getRawBits())
+Fixed::Fixed(const Fixed &other) : value_(other.value_)
 {
 }
 
@@ -34,7 +34,9 @@ Fixed::Fixed(const float value)
 
 Fixed &Fixed::operator=(const Fixed &other)
 {
-	value_ = other.getRawBits();
+	if (this == &other)
+		return (*this);
+	value_ = other.value_;
 	return (*this);
 }
 

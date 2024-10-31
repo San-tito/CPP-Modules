@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/30 10:53:13 by santito          ###   ########.fr       */
+/*   Updated: 2024/10/31 12:27:12 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class Fixed
 	Fixed(const Fixed &other);
 	Fixed &operator=(const Fixed &other);
 	~Fixed(void);
+
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
 
