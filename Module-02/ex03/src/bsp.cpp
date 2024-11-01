@@ -6,7 +6,7 @@
 /*   by: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/28 10:53:09 by santito          ###   ########.fr       */
+/*   Updated: 2024/11/01 19:30:02 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 Fixed	area(Point const &a, Point const &b, Point const &c)
 {
-	Fixed ax(a.getX());
-	Fixed ay(a.getY());
-	Fixed bx(b.getX());
-	Fixed by(b.getY());
-	Fixed cx(c.getX());
-	Fixed cy(c.getY());
-	Fixed computed(ax * (by - cy) + bx * (cy - ay) + cx * (ay - by));
-	return ((computed < Fixed(0)) ? Fixed(-1) * computed : computed);
+	Fixed zero(0);
+	Fixed minus(-1);
+	Fixed computed(a.getX() * (b.getY() - c.getY()) + b.getX() * (c.getY()
+			- a.getY()) + c.getX() * (a.getY() - b.getY()));
+	return ((computed < zero) ? minus * computed : computed);
 }
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point)
