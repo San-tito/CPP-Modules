@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/09 15:07:57 by sguzman           #+#    #+#              #
-#    Updated: 2024/11/02 12:22:54 by santito          ###   ########.fr        #
+#    Updated: 2024/11/02 20:50:04 by santito          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRCS_PATH    = ./src
 OBJS_PATH    = ./build
 INCLUDE_PATH = ./include
 
-SRCS         = AMateria.cpp
+SRCS         = AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp
 MAIN         = main.cpp
 
 ################################################################################

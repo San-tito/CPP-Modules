@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/11/02 12:46:21 by santito          ###   ########.fr       */
+/*   Updated: 2024/11/02 21:00:34 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class Ice : public AMateria
 {
   public:
 	Ice(void);
-	AMateria *clone() const;
+	AMateria *clone(void) const;
 	void use(ICharacter &target);
 };
 

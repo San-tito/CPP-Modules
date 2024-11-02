@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/11/02 12:51:42 by santito          ###   ########.fr       */
+/*   Updated: 2024/11/02 20:58:43 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ AMateria::~AMateria(void)
 {
 }
 
-const std::string &AMateria::getType() const
+const std::string &AMateria::getType(void) const
 {
 	return (type_);
 }
