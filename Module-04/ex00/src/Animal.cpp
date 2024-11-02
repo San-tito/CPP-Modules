@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/30 11:13:28 by santito          ###   ########.fr       */
+/*   Updated: 2024/11/02 12:17:59 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ Animal::Animal(const Animal &other) : type_(other.type_)
 
 Animal &Animal::operator=(const Animal &other)
 {
+	if (this == &other)
+		return (*this);
 	type_ = other.type_;
 	return (*this);
 }

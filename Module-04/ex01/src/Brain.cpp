@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/30 12:12:09 by santito          ###   ########.fr       */
+/*   Updated: 2024/11/02 12:18:54 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ Brain::Brain(const Brain &other)
 
 Brain &Brain::operator=(const Brain &other)
 {
+	if (this == &other)
+		return (*this);
 	for (int i(0); i < IDEAS_SIZE; i++)
 		ideas_[i] = other.ideas_[i];
 	return (*this);

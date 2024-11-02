@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/30 12:18:45 by santito          ###   ########.fr       */
+/*   Updated: 2024/11/02 12:19:06 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ Cat::Cat(const Cat &other) : Animal(other)
 
 Cat &Cat::operator=(const Cat &other)
 {
+	if (this == &other)
+		return (*this);
 	Animal::operator=(other);
 	delete (brain_);
 	brain_ = new Brain(*other.brain_);
