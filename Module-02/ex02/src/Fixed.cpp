@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/31 14:45:24 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/11/02 11:43:30 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ Fixed Fixed::operator/(const Fixed &other) const
 	return (result);
 }
 
-Fixed &Fixed::operator++()
+Fixed &Fixed::operator++(void)
 {
 	value_ += 1;
 	return (*this);
@@ -135,7 +135,7 @@ Fixed Fixed::operator++(int)
 	return (temp);
 }
 
-Fixed &Fixed::operator--()
+Fixed &Fixed::operator--(void)
 {
 	value_ -= 1;
 	return (*this);
