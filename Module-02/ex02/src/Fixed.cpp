@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/11/02 11:43:30 by santito          ###   ########.fr       */
+/*   Updated: 2024/11/03 12:19:45 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,26 @@ Fixed &Fixed::operator=(const Fixed &other)
 
 Fixed::~Fixed(void)
 {
+}
+
+Fixed &Fixed::min(Fixed &a, Fixed &b)
+{
+	return ((a < b) ? a : b);
+}
+
+const Fixed &Fixed::min(const Fixed &a, const Fixed &b)
+{
+	return ((a < b) ? a : b);
+}
+
+Fixed &Fixed::max(Fixed &a, Fixed &b)
+{
+	return ((a > b) ? a : b);
+}
+
+const Fixed &Fixed::max(const Fixed &a, const Fixed &b)
+{
+	return ((a > b) ? a : b);
 }
 
 int Fixed::getRawBits(void) const
@@ -146,26 +166,6 @@ Fixed Fixed::operator--(int)
 	Fixed temp(*this);
 	operator--();
 	return (temp);
-}
-
-Fixed &Fixed::min(Fixed &a, Fixed &b)
-{
-	return ((a < b) ? a : b);
-}
-
-const Fixed &Fixed::min(const Fixed &a, const Fixed &b)
-{
-	return ((a < b) ? a : b);
-}
-
-Fixed &Fixed::max(Fixed &a, Fixed &b)
-{
-	return ((a > b) ? a : b);
-}
-
-const Fixed &Fixed::max(const Fixed &a, const Fixed &b)
-{
-	return ((a > b) ? a : b);
 }
 
 std::ostream &operator<<(std::ostream &os, const Fixed &fixed)
