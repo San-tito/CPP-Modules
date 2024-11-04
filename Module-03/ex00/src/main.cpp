@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/28 11:22:36 by santito          ###   ########.fr       */
+/*   Updated: 2024/11/04 23:05:27 by santito          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 int	main(void)
 {
-	ClapTrap techWarrior("TechnoKnight");
-	ClapTrap repairBot("RepairRover");
-	techWarrior.attack("GiantSlime");
-	techWarrior.takeDamage(5);
-	techWarrior.beRepaired(3);
-	repairBot.attack("MightyDragon");
-	repairBot.takeDamage(10);
-	repairBot.beRepaired(5);
-	ClapTrap cloneBot(repairBot);
-	cloneBot.attack("ShadowBeast");
-	techWarrior = repairBot;
-	techWarrior.attack("InfernalWyrm");
+	ClapTrap hero("Hero");
+	ClapTrap villain("Villain");
+	hero.attack("Villain");
+	villain.takeDamage(0);
+	villain.attack("Hero");
+	hero.takeDamage(0);
+	hero.beRepaired(5);
+	hero.attack("Villain");
+	villain.takeDamage(0);
 	return (0);
 }
