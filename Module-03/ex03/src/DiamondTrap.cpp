@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/11/07 13:23:17 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/11/07 13:36:38 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other),
-	ScavTrap(other), FragTrap(other), name_(other.name_)
+	FragTrap(other), ScavTrap(other), name_(other.name_)
 {
 	std::cout << "DiamondTrap " << name_ << " has been created!\n";
 }
