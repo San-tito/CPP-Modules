@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/10/28 11:31:14 by santito          ###   ########.fr       */
+/*   Updated: 2024/11/07 12:15:52 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,15 @@
 
 int	main(void)
 {
-	ClapTrap techWarrior("TechnoKnight");
-	ScavTrap repairBot("RepairRover");
-	techWarrior.attack("GiantSlime");
-	techWarrior.takeDamage(5);
-	techWarrior.beRepaired(3);
-	repairBot.attack("MightyDragon");
-	repairBot.takeDamage(10);
-	repairBot.beRepaired(5);
-	repairBot.guardGate();
-	ScavTrap cloneBot(repairBot);
-	cloneBot.attack("ShadowBeast");
-	cloneBot.guardGate();
-	techWarrior = repairBot;
-	techWarrior.attack("InfernalWyrm");
+	ScavTrap guardian("Guardian");
+	guardian.attack("Zap Brannigan");
+	guardian.takeDamage(30);
+	guardian.beRepaired(10);
+	guardian.guardGate();
+	std::cout << '\n';
+	ScavTrap protector(guardian);
+	protector.attack("Bender");
+	protector.takeDamage(50);
+	protector.guardGate();
 	return (0);
 }
