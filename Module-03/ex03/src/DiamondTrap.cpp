@@ -6,35 +6,34 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/11/01 16:14:21 by santito          ###   ########.fr       */
+/*   Updated: 2024/11/07 13:02:10 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap(void) : ClapTrap("DefaultDiamond_clap_name"),
-	FragTrap("DefaultDiamond"), ScavTrap("DefaultDiamond"),
-	name_("DefaultDiamond")
+DiamondTrap::DiamondTrap(void) : ClapTrap("DiamondTrap_clap_name"),
+	ScavTrap("DiamondTrap"), FragTrap("DiamondTrap"), name_("DiamondTrap")
 {
 	hit_points_ = FragTrap::hit_points_;
 	energy_points_ = ScavTrap::energy_points_;
 	attack_damage_ = FragTrap::attack_damage_;
-	std::cout << "DiamondTrap Default constructor called for " << name_ << "\n";
+	std::cout << "DiamondTrap " << name_ << " has been created!\n";
 }
 
 DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name
-	+ "_clap_name"), FragTrap(name), ScavTrap(name), name_(name)
+	+ "_clap_name"), ScavTrap(name), FragTrap(name), name_(name)
 {
 	hit_points_ = FragTrap::hit_points_;
 	energy_points_ = ScavTrap::energy_points_;
 	attack_damage_ = FragTrap::attack_damage_;
-	std::cout << "DiamondTrap constructor called for " << name_ << "\n";
+	std::cout << "DiamondTrap " << name_ << " has been created!\n";
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other),
-	FragTrap(other), ScavTrap(other), name_(other.name_)
+	ScavTrap(other), FragTrap(other), name_(other.name_)
 {
-	std::cout << "DiamondTrap copy constructor called for " << name_ << "\n";
+	std::cout << "DiamondTrap " << name_ << " has been created!\n";
 }
 
 DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
@@ -48,7 +47,7 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
 
 DiamondTrap::~DiamondTrap(void)
 {
-	std::cout << "DiamondTrap destructor called for " << name_ << "\n";
+	std::cout << "DiamondTrap " << name_ << " has been destroyed!\n";
 }
 
 void DiamondTrap::attack(const std::string &target)
