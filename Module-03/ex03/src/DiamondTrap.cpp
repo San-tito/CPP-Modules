@@ -6,27 +6,27 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2024/11/07 13:02:10 by sguzman          ###   ########.fr       */
+/*   Updated: 2024/11/07 13:23:17 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap(void) : ClapTrap("DiamondTrap_clap_name"),
-	ScavTrap("DiamondTrap"), FragTrap("DiamondTrap"), name_("DiamondTrap")
+	FragTrap("DiamondTrap"), ScavTrap("DiamondTrap"), name_("DiamondTrap")
 {
-	hit_points_ = FragTrap::hit_points_;
-	energy_points_ = ScavTrap::energy_points_;
-	attack_damage_ = FragTrap::attack_damage_;
+	hit_points_ = 100;
+	energy_points_ = 100;
+	attack_damage_ = 30;
 	std::cout << "DiamondTrap " << name_ << " has been created!\n";
 }
 
 DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name
-	+ "_clap_name"), ScavTrap(name), FragTrap(name), name_(name)
+	+ "_clap_name"), FragTrap(name), ScavTrap(name), name_(name)
 {
-	hit_points_ = FragTrap::hit_points_;
-	energy_points_ = ScavTrap::energy_points_;
-	attack_damage_ = FragTrap::attack_damage_;
+	hit_points_ = 100;
+	energy_points_ = 100;
+	attack_damage_ = 30;
 	std::cout << "DiamondTrap " << name_ << " has been created!\n";
 }
 
