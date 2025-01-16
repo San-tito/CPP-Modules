@@ -15,13 +15,21 @@
 
 # include <cmath>
 # include <cstdlib>
+# include <iomanip>
 # include <iostream>
 # include <limits>
+# include <sstream>
 
 class ScalarConverter
 {
   public:
 	static void convert(const std::string &literal);
+
+  private:
+    static void convertToChar(double value, std::string &str);
+    static void convertToInt(double value, std::string &str);
+    static void convertToFloat(double value, std::string &str);
+    static void convertToDouble(double value, std::string &str);
 };
 
 #endif /* SCALARCONVERTER_HPP */
