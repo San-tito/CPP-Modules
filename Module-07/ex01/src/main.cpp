@@ -6,20 +6,16 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/01/19 20:33:52 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/01/22 12:12:34 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "iter.hpp"
 
-void	print(int &x)
+template <typename T>
+void print(T &x)
 {
 	std::cout << x << " ";
-}
-
-void	print(std::string &s)
-{
-	std::cout << s << " ";
 }
 
 void	inc(int &x)
@@ -32,7 +28,7 @@ int	main(void)
 	int	tab[5] = {0, 1, 2, 3, 4};
 
 	std::cout << "int array: ";
-	iter(tab, 5, print);
+	iter(tab, 5, print<int>);
 	std::cout << "\n";
 	iter(tab, 5, inc);
 	std::cout << "int array after increment: ";
