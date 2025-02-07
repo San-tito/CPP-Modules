@@ -1,0 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
+/*   Updated: 2025/02/07 13:05:17 by sguzman          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef BITCOINEXCHANGE_HPP
+# define BITCOINEXCHANGE_HPP
+
+# include <ctime>
+# include <fstream>
+# include <iostream>
+# include <map>
+# include <sstream>
+# include <string>
+
+class BitcoinExchange
+{
+  public:
+	BitcoinExchange(const char *filename);
+	BitcoinExchange(const BitcoinExchange &other);
+	BitcoinExchange &operator=(const BitcoinExchange &other);
+	~BitcoinExchange(void);
+	std::string computeLine(const std::string &line) const;
+
+  private:
+	std::map<time_t, float> data_;
+	time_t parseDate(const std::string &date) const;
+};
+
+#endif /* BITCOINEXCHANGE_HPP */
