@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/02/07 13:27:45 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/02/09 17:53:17 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,17 @@ std::string BitcoinExchange::computeLine(const std::string &line) const
 	float value(0);
 	if (std::getline(iss, date, '|') && iss >> value)
 	{
-		if (value < 0 || value > 10000)
+		if (value < 0 || value > 1000)
 			throw std::runtime_error("Error: invalid value => "
 				+ static_cast<std::ostringstream &>(std::ostringstream() << value).str());
 		time_t t(parseDate(date));
 		std::map<time_t, float>::const_iterator it = data_.lower_bound(t);
-		if (it == data_.end())
-			throw std::runtime_error("Error: no data for date => " + date);
+		if (it == data_.end() || it->first != t)
+		{
+			if (it == data_.begin())
+				throw std::runtime_error("Error: no data for date => " + date);
+			--it;
+		}
 		std::ostringstream oss;
 		oss << date << " => " << value << " = " << (value * it->second);
 		return (oss.str());
