@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/02/07 13:05:17 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/02/12 13:26:42 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ class BitcoinExchange
   private:
 	std::map<time_t, float> data_;
 	time_t parseDate(const std::string &date) const;
+	std::string trim(const std::string &str) const;
 };
 
 #endif /* BITCOINEXCHANGE_HPP */

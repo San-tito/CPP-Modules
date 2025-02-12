@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/02/09 17:53:17 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/02/12 13:30:47 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ BitcoinExchange::BitcoinExchange(const char *filename)
 		std::string date("");
 		float price(0);
 		if (std::getline(iss, date, ',') && iss >> price)
-			data_[parseDate(date)] = price;
+			data_[parseDate(trim(date))] = price;
 	}
 	file.close();
 }
@@ -46,10 +46,24 @@ BitcoinExchange::~BitcoinExchange(void)
 {
 }
 
+std::string BitcoinExchange::trim(const std::string &str) const
+{
+	std::string::const_iterator start(str.begin());
+	while (start != str.end() && std::isspace(*start))
+		++start;
+	std::string::const_iterator end(str.end());
+	do
+	{
+		--end;
+	} while (std::distance(start, end) > 0 && std::isspace(*end));
+	return (std::string(start, end + 1));
+}
+
 time_t BitcoinExchange::parseDate(const std::string &date) const
 {
 	std::tm tm;
-	if (strptime(date.c_str(), "%Y-%m-%d", &tm) == NULL)
+	const char *res(strptime(date.c_str(), "%Y-%m-%d", &tm));
+	if (res == NULL || *res != '\0')
 		throw std::runtime_error("Error: invalid date format => " + date);
 	return (std::mktime(&tm));
 }
@@ -61,6 +75,7 @@ std::string BitcoinExchange::computeLine(const std::string &line) const
 	float value(0);
 	if (std::getline(iss, date, '|') && iss >> value)
 	{
+		date = trim(date);
 		if (value < 0 || value > 1000)
 			throw std::runtime_error("Error: invalid value => "
 				+ static_cast<std::ostringstream &>(std::ostringstream() << value).str());
