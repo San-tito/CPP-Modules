@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/02/12 13:30:47 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:10:32 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ std::string BitcoinExchange::trim(const std::string &str) const
 
 time_t BitcoinExchange::parseDate(const std::string &date) const
 {
-	std::tm tm;
+	std::tm tm = {};
 	const char *res(strptime(date.c_str(), "%Y-%m-%d", &tm));
 	if (res == NULL || *res != '\0')
 		throw std::runtime_error("Error: invalid date format => " + date);
