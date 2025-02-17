@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/02/10 11:49:49 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/02/17 18:42:31 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class PmergeMe
 	PmergeMe &operator=(const PmergeMe &other);
 	~PmergeMe(void);
 
-	template <typename Container> double timedSort(Container &container)
+	template <typename T> double timedSort(T &container)
 	{
 		clock_t start = clock();
 		sort(container);
@@ -38,21 +38,28 @@ class PmergeMe
 	};
 
   private:
-	template <typename Container> void sort(Container &container)
+	template <typename T> T &merge(T &left, T &right)
 	{
-		for (size_t i = 1; i < container.size(); i++)
+		if (left.back() < right.back())
 		{
-			int key(container[i]);
-			int j(i - 1);
-
-			while (j >= 0 && container[j] > key)
-			{
-				container[j + 1] = container[j];
-				j--;
-			}
-
-			container[j + 1] = key;
+			left.insert(left.end(), right.begin(), right.end());
+			return (left);
 		}
+		else
+		{
+			right.insert(right.end(), left.begin(), left.end());
+			return (right);
+		}
+	};
+	template <typename T> void sort(T &seq)
+	{
+		if (seq.size() <= 1)
+			return ;
+		T left(seq.begin(), seq.begin() + seq.size() / 2);
+		T right(seq.begin() + seq.size() / 2, seq.end());
+		sort(left);
+		sort(right);
+		seq = merge(left, right);
 	};
 };
 
