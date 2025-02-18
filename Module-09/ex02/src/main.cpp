@@ -6,18 +6,11 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/02/09 21:38:23 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/02/18 12:19:07 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-
-template <typename Container> void printContainer(const Container &container)
-{
-	for (typename Container::const_iterator it = container.begin(); it != container.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << '\n';
-}
 
 int	main(int argc, char *argv[])
 {
