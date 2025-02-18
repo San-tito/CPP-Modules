@@ -6,14 +6,13 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/02/18 13:04:34 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/02/18 15:49:36 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
-# include <algorithm>
 # include <ctime>
 # include <deque>
 # include <iomanip>
@@ -45,20 +44,21 @@ class PmergeMe
 	};
 
   private:
-	template <typename T> void sort(T &container, size_t pair_size = 1)
+	size_t jacobsthal(size_t n);
+	template <typename T> void sort(T &seq, size_t pair_size = 1)
 	{
 		typedef typename T::iterator iterator;
 
-		size_t num_pairs = container.size() / pair_size;
+		size_t num_pairs = seq.size() / pair_size;
 		if (num_pairs <= 1)
 			return ;
 
 		for (size_t i = 0; i < num_pairs * pair_size; i += (pair_size * 2))
 		{
-			iterator start(container.begin() + i);
-			iterator mid(container.begin() + i + pair_size);
-			iterator end(container.begin() + i + (pair_size * 2));
-			if (end > container.end())
+			iterator start(seq.begin() + i);
+			iterator mid(seq.begin() + i + pair_size);
+			iterator end(seq.begin() + i + (pair_size * 2));
+			if (end > seq.end())
 				continue ;
 			T left(start, mid);
 			T right(mid, end);
@@ -73,46 +73,47 @@ class PmergeMe
 			// 	std::cout << *it << " ";
 			// std::cout << "]" << std::endl;
 
-			if (left.empty() == 0 && right.empty() == 0
-				&& left.back() > right.back())
+			if (!left.empty() && !right.empty() && left.back() > right.back())
 				std::swap_ranges(start, mid, mid);
 		}
 
-		sort(container, pair_size * 2);
+		sort(seq, pair_size * 2);
 		T main;
 		T pend;
 
-		bool first_iteration(true);
-		for (size_t i = 0; i < container.size(); i += (pair_size * 2))
+		main.insert(main.end(), seq.begin(), seq.begin() + pair_size);
+		main.insert(main.end(), seq.begin() + pair_size, seq.begin()
+			+ (pair_size * 2));
+		for (size_t i = (pair_size * 2); i < seq.size(); i += (pair_size * 2))
 		{
-			iterator start(container.begin() + i);
-			iterator mid(container.begin() + i + pair_size);
-			iterator end(container.begin() + i + (pair_size * 2));
-			if (end > container.end())
+			iterator start(seq.begin() + i);
+			iterator mid(seq.begin() + i + pair_size);
+			iterator end(seq.begin() + i + (pair_size * 2));
+			if (end > seq.end())
 			{
-				pend.insert(pend.end(), start, container.end());
+				pend.insert(pend.end(), start, seq.end());
 				continue ;
 			}
 			T b(start, mid);
 			T a(mid, end);
-
-			if (first_iteration)
-			{
-				main.insert(main.end(), b.begin(), b.end());
-				main.insert(main.end(), a.begin(), a.end());
-				first_iteration = false;
-			}
-			else
-			{
-				main.insert(main.end(), a.begin(), a.end());
-				pend.insert(pend.end(), b.begin(), b.end());
-			}
+			main.insert(main.end(), a.begin(), a.end());
+			pend.insert(pend.end(), b.begin(), b.end());
 		}
 
 		std::cout << "Main chain: ";
 		printContainer(main);
 		std::cout << "Pend chain: ";
 		printContainer(pend);
+
+		size_t previous(jacobsthal(1));
+		for (size_t k = 2;; k++)
+		{
+			size_t current(jacobsthal(k));
+			if (current - previous > pend.size())
+				break ;
+			std::cout << "prev: " << previous << " curr: " << current << '\n';
+			previous = current;
+		}
 	};
 };
 
