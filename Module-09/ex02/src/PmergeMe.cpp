@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/07 13:03:28 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/07 13:08:51 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ void PmergeMe::Sort(std::vector<int> &vec, size_t pair_size)
 	std::vector<int> main(vec.begin(), vec.begin() + pair_size * 2);
 	std::vector<int> pend;
 	std::vector<int> odd;
-	for (size_t i = pair_size * 2; i + pair_size < vec.size(); i += pair_size
-		* 2)
+	size_t i(0);
+	for (i = pair_size * 2; i + pair_size < vec.size(); i += pair_size * 2)
 	{
 		std::vector<int> b(vec.begin() + i, vec.begin() + i + pair_size);
 		pend.insert(pend.end(), b.begin(), b.end());
