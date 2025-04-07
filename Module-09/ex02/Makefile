@@ -6,7 +6,7 @@
 #    By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/09 15:07:57 by sguzman           #+#    #+#              #
-#    Updated: 2025/02/09 20:12:27 by sguzman          ###   ########.fr        #
+#    Updated: 2025/02/23 14:43:09 by sguzman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 NAME        = PmergeMe
 CC          = c++
-CFLAGS      = -Wall -Wextra -Werror -std=c++98
+CFLAGS      = -Wall -Wextra -Werror -std=c++98 -g
 DFLAGS      = -MMD -MF $(@:.o=.d)
 
 ifneq ($(SANITIZER),)
