@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/07 13:08:51 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/09 18:08:35 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ PmergeMe::~PmergeMe(void)
 
 void PmergeMe::Run(void)
 {
+	double	time_vector;
+	double	time_deque;
+
 	std::cout << "Before: ";
 	Display(vec_);
-	double time_vector = TimedSort(vec_);
-	double time_deque = TimedSort(deq_);
+	time_vector = TimedSort(vec_);
+	time_deque = TimedSort(deq_);
 	std::cout << "After: ";
 	Display(vec_);
 	std::cout << "Time to process a range of " << vec_.size() << " elements with std::vector: " << std::fixed << std::setprecision(5) << time_vector << " seconds.\n";
@@ -72,8 +75,7 @@ size_t PmergeMe::Jacobsthal(size_t n)
 	return (Jacobsthal(n - 1) + 2 * Jacobsthal(n - 2));
 }
 
-template <typename Container>
-void PmergeMe::Display(Container &container)
+template <typename Container> void PmergeMe::Display(Container &container)
 {
 	for (typename Container::iterator it = container.begin(); it != container.end(); ++it)
 		std::cout << *it << " ";
@@ -82,45 +84,48 @@ void PmergeMe::Display(Container &container)
 template void PmergeMe::Display(std::vector<int> &);
 template void PmergeMe::Display(std::deque<int> &);
 
-template <typename Container>
-double PmergeMe::TimedSort(Container &container)
+template <typename Container> double PmergeMe::TimedSort(Container &container)
 {
-	clock_t start = clock();
+	clock_t	start;
+	clock_t	end;
+
+	start = clock();
 	Sort(container);
-	clock_t end = clock();
-	return static_cast<double>(end - start) / CLOCKS_PER_SEC;
+	end = clock();
+	return (static_cast<double>(end - start) / CLOCKS_PER_SEC);
 }
 template double PmergeMe::TimedSort(std::vector<int> &);
 template double PmergeMe::TimedSort(std::deque<int> &);
 
-template <typename Container>
-void PmergeMe::Sort(Container &container, size_t elem_size)
+template <typename Container> void PmergeMe::Sort(Container &container,
+	size_t elem_size)
 {
 	typedef typename Container::iterator iterator;
 	size_t num_elems(container.size() / elem_size);
 	if (num_elems <= 1)
 		return ;
-	for(iterator start(container.begin()); start != container.end(); start += elem_size * 2)
+	for (iterator start(container.begin()); start != container.end(); start
+		+= elem_size * 2)
 	{
 		iterator mid(start + elem_size);
 		iterator end(start + elem_size * 2);
 		if (end > container.end())
 			break ;
-		if(*mid > *end)
+		Container left(start, mid);
+		Container right(mid, end);
+		if (left.back() > right.back())
 			std::swap_ranges(start, mid, mid);
 	}
 	Sort(container, elem_size * 2);
 	Container main(container.begin(), container.begin() + elem_size * 2);
 	Container pend(0);
 	Container odd(0);
-	for(iterator it(container.begin() + elem_size * 2); it != container.end(); it += elem_size * 2)
+	for (iterator it(container.begin() + elem_size
+			* 2); it < container.end(); it += elem_size * 2)
 	{
 		pend.insert(pend.end(), it, it + elem_size);
-		if (it + elem_size * 2 < container.end())
-		{
-			odd.insert(odd.end(), it + elem_size, container.end());
+		if (it + elem_size * 2 > container.end())
 			break ;
-		}
 		main.insert(main.end(), it + elem_size, it + elem_size * 2);
 	}
 	std::cout << "Main: ";
@@ -132,5 +137,3 @@ void PmergeMe::Sort(Container &container, size_t elem_size)
 }
 template void PmergeMe::Sort(std::vector<int> &, size_t);
 template void PmergeMe::Sort(std::deque<int> &, size_t);
-
-
