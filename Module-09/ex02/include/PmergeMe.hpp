@@ -17,7 +17,7 @@
 # include <ctime>
 # include <iomanip>
 # include <iostream>
-# include <list>
+# include <deque>
 # include <sstream>
 # include <vector>
 
@@ -42,7 +42,7 @@ class PmergeMe
 
   private:
 	std::vector<int> vec_;
-	std::list<int> lst_;
+	std::deque<int> deq_;
 	size_t Jacobsthal(size_t n);
 };
 

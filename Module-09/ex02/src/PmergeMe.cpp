@@ -30,11 +30,11 @@ PmergeMe::PmergeMe(int argc, char *argv[])
 			exit(1);
 		}
 		vec_.push_back(num);
-		lst_.push_back(num);
+		deq_.push_back(num);
 	}
 }
 
-PmergeMe::PmergeMe(const PmergeMe &other) : vec_(other.vec_), lst_(other.lst_)
+PmergeMe::PmergeMe(const PmergeMe &other) : vec_(other.vec_), deq_(other.deq_)
 {
 }
 
@@ -43,7 +43,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 	if (this == &other)
 		return (*this);
 	vec_ = other.vec_;
-	lst_ = other.lst_;
+	deq_ = other.deq_;
 	return (*this);
 }
 
@@ -56,11 +56,11 @@ void PmergeMe::Run(void)
 	std::cout << "Before: ";
 	Display(vec_);
 	double time_vector = TimedSort(vec_);
-	double time_list = TimedSort(lst_);
+	double time_deque = TimedSort(deq_);
 	std::cout << "After: ";
 	Display(vec_);
 	std::cout << "Time to process a range of " << vec_.size() << " elements with std::vector: " << std::fixed << std::setprecision(5) << time_vector << " seconds.\n";
-	std::cout << "Time to process a range of " << lst_.size() << " elements with std::list: " << std::fixed << std::setprecision(5) << time_list << " seconds.\n";
+	std::cout << "Time to process a range of " << deq_.size() << " elements with std::deque: " << std::fixed << std::setprecision(5) << time_deque << " seconds.\n";
 }
 
 size_t PmergeMe::Jacobsthal(size_t n)
@@ -80,7 +80,7 @@ void PmergeMe::Display(Container &container)
 	std::cout << "\n";
 }
 template void PmergeMe::Display(std::vector<int> &);
-template void PmergeMe::Display(std::list<int> &);
+template void PmergeMe::Display(std::deque<int> &);
 
 template <typename Container>
 double PmergeMe::TimedSort(Container &container)
@@ -91,14 +91,14 @@ double PmergeMe::TimedSort(Container &container)
 	return static_cast<double>(end - start) / CLOCKS_PER_SEC;
 }
 template double PmergeMe::TimedSort(std::vector<int> &);
-template double PmergeMe::TimedSort(std::list<int> &);
+template double PmergeMe::TimedSort(std::deque<int> &);
 
 template <typename Container>
 void PmergeMe::Sort(Container &container, size_t elem_size)
 {
 	typedef typename Container::iterator iterator;
-	size_t num_pairs(container.size() / elem_size);
-	if (num_pairs <= 1)
+	size_t num_elems(container.size() / elem_size);
+	if (num_elems <= 1)
 		return ;
 	for(iterator start(container.begin()); start != container.end(); start += elem_size * 2)
 	{
@@ -111,13 +111,16 @@ void PmergeMe::Sort(Container &container, size_t elem_size)
 	}
 	Sort(container, elem_size * 2);
 	Container main(container.begin(), container.begin() + elem_size * 2);
-	Container pend;
-	Container odd;
-	for (iterator it(container.begin() + elem_size * 2); it != container.end(); it += elem_size * 2)
+	Container pend(0);
+	Container odd(0);
+	for(iterator it(container.begin() + elem_size * 2); it != container.end(); it += elem_size * 2)
 	{
 		pend.insert(pend.end(), it, it + elem_size);
-		if(*(it + elem_size * 2) > container.end())
+		if (it + elem_size * 2 < container.end())
+		{
+			odd.insert(odd.end(), it + elem_size, container.end());
 			break ;
+		}
 		main.insert(main.end(), it + elem_size, it + elem_size * 2);
 	}
 	std::cout << "Main: ";
@@ -128,6 +131,6 @@ void PmergeMe::Sort(Container &container, size_t elem_size)
 	Display(odd);
 }
 template void PmergeMe::Sort(std::vector<int> &, size_t);
-template void PmergeMe::Sort(std::list<int> &, size_t);
+template void PmergeMe::Sort(std::deque<int> &, size_t);
 
 
