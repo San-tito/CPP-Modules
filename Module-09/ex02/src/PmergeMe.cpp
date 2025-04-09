@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/10 00:05:39 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/10 01:23:04 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,11 @@ template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 			break ;
 		}
 		main.insert(main.end(), it + elem_size, it + elem_size * 2);
+	}
+	for (iterator it(pend.begin()); it + elem_size <= pend.end(); it
+		+= elem_size)
+	{
+		T element(it, it + elem_size);
 	}
 	std::cout << "Main: ";
 	Display(main);
