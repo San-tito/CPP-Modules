@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/09 18:08:35 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/10 00:05:39 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,16 @@ size_t PmergeMe::Jacobsthal(size_t n)
 	return (Jacobsthal(n - 1) + 2 * Jacobsthal(n - 2));
 }
 
-template <typename Container> void PmergeMe::Display(Container &container)
+template <typename T> void PmergeMe::Display(T &container)
 {
-	for (typename Container::iterator it = container.begin(); it != container.end(); ++it)
+	for (typename T::iterator it = container.begin(); it != container.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << "\n";
 }
 template void PmergeMe::Display(std::vector<int> &);
 template void PmergeMe::Display(std::deque<int> &);
 
-template <typename Container> double PmergeMe::TimedSort(Container &container)
+template <typename T> double PmergeMe::TimedSort(T &container)
 {
 	clock_t	start;
 	clock_t	end;
@@ -97,35 +97,38 @@ template <typename Container> double PmergeMe::TimedSort(Container &container)
 template double PmergeMe::TimedSort(std::vector<int> &);
 template double PmergeMe::TimedSort(std::deque<int> &);
 
-template <typename Container> void PmergeMe::Sort(Container &container,
-	size_t elem_size)
+template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 {
-	typedef typename Container::iterator iterator;
+	typedef typename T::iterator iterator;
 	size_t num_elems(container.size() / elem_size);
 	if (num_elems <= 1)
 		return ;
-	for (iterator start(container.begin()); start != container.end(); start
-		+= elem_size * 2)
+	for (iterator start(container.begin()); start + elem_size
+		* 2 <= container.end(); start += elem_size * 2)
 	{
 		iterator mid(start + elem_size);
 		iterator end(start + elem_size * 2);
-		if (end > container.end())
-			break ;
-		Container left(start, mid);
-		Container right(mid, end);
+		T left(start, mid);
+		T right(mid, end);
 		if (left.back() > right.back())
 			std::swap_ranges(start, mid, mid);
 	}
 	Sort(container, elem_size * 2);
-	Container main(container.begin(), container.begin() + elem_size * 2);
-	Container pend(0);
-	Container odd(0);
-	for (iterator it(container.begin() + elem_size
-			* 2); it < container.end(); it += elem_size * 2)
+	T main(container.begin(), container.begin() + elem_size * 2);
+	T pend(0);
+	T odd(0);
+	if (container.begin() + elem_size * 3 >= container.end())
+		odd.insert(odd.end(), container.begin() + elem_size * 2,
+			container.end());
+	for (iterator it(container.begin() + elem_size * 2); it
+		+ elem_size < container.end(); it += elem_size * 2)
 	{
 		pend.insert(pend.end(), it, it + elem_size);
 		if (it + elem_size * 2 > container.end())
+		{
+			odd.insert(odd.end(), it + elem_size, container.end());
 			break ;
+		}
 		main.insert(main.end(), it + elem_size, it + elem_size * 2);
 	}
 	std::cout << "Main: ";

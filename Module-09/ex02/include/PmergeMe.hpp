@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/07 12:42:14 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/09 23:28:06 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include <algorithm>
 # include <ctime>
+# include <deque>
 # include <iomanip>
 # include <iostream>
-# include <deque>
 # include <sstream>
 # include <vector>
 
@@ -31,19 +31,13 @@ class PmergeMe
 
 	void Run(void);
 
-	template <typename Container>
-	void Display(Container &container);
-
-	template <typename Container>
-	double TimedSort(Container &container);
-
-	template <typename Container>
-	void Sort(Container &container, size_t elem_size = 1);
-
   private:
 	std::vector<int> vec_;
 	std::deque<int> deq_;
 	size_t Jacobsthal(size_t n);
+	template <typename T> void Display(T &container);
+	template <typename T> double TimedSort(T &container);
+	template <typename T> void Sort(T &container, size_t elem_size = 1);
 };
 
 #endif /* PMERGEME_HPP */
