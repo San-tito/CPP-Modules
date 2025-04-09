@@ -55,8 +55,8 @@ void PmergeMe::Run(void)
 {
 	std::cout << "Before: ";
 	Display(vec_);
-	double time_vector(TimedSort(vec_));
-	double time_list(TimedSort(lst_));
+	double time_vector = TimedSort(vec_);
+	double time_list = TimedSort(lst_);
 	std::cout << "After: ";
 	Display(vec_);
 	std::cout << "Time to process a range of " << vec_.size() << " elements with std::vector: " << std::fixed << std::setprecision(5) << time_vector << " seconds.\n";
@@ -72,73 +72,53 @@ size_t PmergeMe::Jacobsthal(size_t n)
 	return (Jacobsthal(n - 1) + 2 * Jacobsthal(n - 2));
 }
 
-void PmergeMe::Display(std::vector<int> &vec)
+template <typename Container>
+void PmergeMe::Display(Container &container)
 {
-	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it)
+	for (typename Container::iterator it = container.begin(); it != container.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << "\n";
 }
+template void PmergeMe::Display(std::vector<int> &);
+template void PmergeMe::Display(std::list<int> &);
 
-void PmergeMe::Display(std::list<int> &lst)
+template <typename Container>
+double PmergeMe::TimedSort(Container &container)
 {
-	for (std::list<int>::iterator it = lst.begin(); it != lst.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << "\n";
+	clock_t start = clock();
+	Sort(container);
+	clock_t end = clock();
+	return static_cast<double>(end - start) / CLOCKS_PER_SEC;
 }
+template double PmergeMe::TimedSort(std::vector<int> &);
+template double PmergeMe::TimedSort(std::list<int> &);
 
-double PmergeMe::TimedSort(std::vector<int> &vec)
+template <typename Container>
+void PmergeMe::Sort(Container &container, size_t elem_size)
 {
-	clock_t	start;
-	clock_t	end;
-
-	start = clock();
-	Sort(vec);
-	end = clock();
-	return (static_cast<double>(end - start) / CLOCKS_PER_SEC);
-}
-
-double PmergeMe::TimedSort(std::list<int> &lst)
-{
-	clock_t start(clock());
-	Sort(lst);
-	clock_t end(clock());
-	return (static_cast<double>(end - start) / CLOCKS_PER_SEC);
-}
-
-void PmergeMe::Sort(std::vector<int> &vec, size_t pair_size)
-{
-	size_t num_pairs(vec.size() / pair_size);
+	typedef typename Container::iterator iterator;
+	size_t num_pairs(container.size() / elem_size);
 	if (num_pairs <= 1)
 		return ;
-	for (size_t i = 0; i < vec.size(); i += pair_size * 2)
+	for(iterator start(container.begin()); start != container.end(); start += elem_size * 2)
 	{
-		std::vector<int>::iterator start(vec.begin() + i);
-		std::vector<int>::iterator mid(vec.begin() + i + pair_size);
-		std::vector<int>::iterator end(vec.begin() + i + pair_size * 2);
-		if (end > vec.end())
-			continue ;
-		std::vector<int> left(start, mid);
-		std::vector<int> right(mid, end);
-		if (left.back() > right.back())
+		iterator mid(start + elem_size);
+		iterator end(start + elem_size * 2);
+		if (end > container.end())
+			break ;
+		if(*mid > *end)
 			std::swap_ranges(start, mid, mid);
 	}
-	Sort(vec, pair_size * 2);
-	std::vector<int> main(vec.begin(), vec.begin() + pair_size * 2);
-	std::vector<int> pend;
-	std::vector<int> odd;
-	size_t i(0);
-	for (i = pair_size * 2; i + pair_size < vec.size(); i += pair_size * 2)
+	Sort(container, elem_size * 2);
+	Container main(container.begin(), container.begin() + elem_size * 2);
+	Container pend;
+	Container odd;
+	for (iterator it(container.begin() + elem_size * 2); it != container.end(); it += elem_size * 2)
 	{
-		std::vector<int> b(vec.begin() + i, vec.begin() + i + pair_size);
-		pend.insert(pend.end(), b.begin(), b.end());
-		if (i + pair_size * 2 > vec.size())
-		{
-			odd.insert(odd.end(), vec.begin() + i + pair_size, vec.end());
+		pend.insert(pend.end(), it, it + elem_size);
+		if(*(it + elem_size * 2) > container.end())
 			break ;
-		}
-		std::vector<int> a(vec.begin() + i + pair_size, vec.begin() + i
-			+ pair_size * 2);
-		main.insert(main.end(), a.begin(), a.end());
+		main.insert(main.end(), it + elem_size, it + elem_size * 2);
 	}
 	std::cout << "Main: ";
 	Display(main);
@@ -147,9 +127,7 @@ void PmergeMe::Sort(std::vector<int> &vec, size_t pair_size)
 	std::cout << "Odd: ";
 	Display(odd);
 }
+template void PmergeMe::Sort(std::vector<int> &, size_t);
+template void PmergeMe::Sort(std::list<int> &, size_t);
 
-void PmergeMe::Sort(std::list<int> &lst, size_t pair_size)
-{
-	static_cast<void>(lst);
-	static_cast<void>(pair_size);
-}
+
