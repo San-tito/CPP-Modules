@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/13 22:02:09 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/14 01:22:28 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,22 @@ template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 	}
 	if (it < container.end())
 		odd.insert(odd.end(), it, container.end());
+	// for (size_t jc = 3;; jc++)
+	// {
+	// 	size_t diff(Jacobsthal(jc) - Jacobsthal(jc - 1));
+	// 	if (diff > pend.size() / elem_size)
+	// 		diff = pend.size();
+	// 	while (diff)
+	// 	{
+	// 		T element(pend.begin(), pend.begin() + elem_size);
+	// 		iterator low(main.begin() + elem_size - 1);
+	// 		iterator high(main.end() - 1);
+	// 		iterator search(BinarySearch(low, high, elem_size, element.back()));
+	// 		main.insert(search, element.begin(), element.end());
+	// 		pend.erase(pend.begin(), pend.begin() + elem_size);
+	// 		diff--;
+	// 	}
+	// }
 	it = pend.begin();
 	for (; it + elem_size <= pend.end(); it += elem_size)
 	{
