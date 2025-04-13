@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/10 01:23:04 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:41:47 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,18 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 
 PmergeMe::~PmergeMe(void)
 {
+	std::vector<int> sorted_vec(vec_);
+	std::sort(sorted_vec.begin(), sorted_vec.end());
+	if (sorted_vec != vec_)
+		std::cerr << "Error: is not sorted\n";
 }
 
 void PmergeMe::Run(void)
 {
-	double	time_vector;
-	double	time_deque;
-
 	std::cout << "Before: ";
 	Display(vec_);
-	time_vector = TimedSort(vec_);
-	time_deque = TimedSort(deq_);
+	double time_vector(TimedSort(vec_));
+	double time_deque(TimedSort(deq_));
 	std::cout << "After: ";
 	Display(vec_);
 	std::cout << "Time to process a range of " << vec_.size() << " elements with std::vector: " << std::fixed << std::setprecision(5) << time_vector << " seconds.\n";
@@ -86,12 +87,9 @@ template void PmergeMe::Display(std::deque<int> &);
 
 template <typename T> double PmergeMe::TimedSort(T &container)
 {
-	clock_t	start;
-	clock_t	end;
-
-	start = clock();
+	clock_t start(clock());
 	Sort(container);
-	end = clock();
+	clock_t end(clock());
 	return (static_cast<double>(end - start) / CLOCKS_PER_SEC);
 }
 template double PmergeMe::TimedSort(std::vector<int> &);
@@ -135,13 +133,21 @@ template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 		+= elem_size)
 	{
 		T element(it, it + elem_size);
+		iterator it2(main.begin());
+		for (; it2 + elem_size <= main.end(); it2 += elem_size)
+		{
+			T element2(it2, it2 + elem_size);
+			if (element.back() < element2.back())
+			{
+				main.insert(it2, element.begin(), element.end());
+				break ;
+			}
+		}
+		if (it2 == main.end())
+			main.insert(main.end(), element.begin(), element.end());
 	}
-	std::cout << "Main: ";
-	Display(main);
-	std::cout << "Pend: ";
-	Display(pend);
-	std::cout << "Odd: ";
-	Display(odd);
+	main.insert(main.end(), odd.begin(), odd.end());
+	container = main;
 }
 template void PmergeMe::Sort(std::vector<int> &, size_t);
 template void PmergeMe::Sort(std::deque<int> &, size_t);
