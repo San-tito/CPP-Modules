@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/13 16:41:47 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/13 22:02:09 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,26 @@ template <typename T> double PmergeMe::TimedSort(T &container)
 template double PmergeMe::TimedSort(std::vector<int> &);
 template double PmergeMe::TimedSort(std::deque<int> &);
 
+template <typename T> T PmergeMe::BinarySearch(T low, T high, size_t e,
+	int value)
+{
+	while (low <= high)
+	{
+		size_t distance(high - low);
+		size_t num_elems(distance / e + 1);
+		T mid(low + ((num_elems / 2) * e));
+		if (*mid < value)
+			low = mid + e;
+		else
+			high = mid - e;
+	}
+	return (low);
+}
+template std::vector<int>::iterator PmergeMe::BinarySearch(std::vector<int>::iterator,
+	std::vector<int>::iterator, size_t, int);
+template std::deque<int>::iterator PmergeMe::BinarySearch(std::deque<int>::iterator,
+	std::deque<int>::iterator, size_t, int);
+
 template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 {
 	typedef typename T::iterator iterator;
@@ -115,36 +135,25 @@ template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 	T main(container.begin(), container.begin() + elem_size * 2);
 	T pend(0);
 	T odd(0);
-	if (container.begin() + elem_size * 3 >= container.end())
-		odd.insert(odd.end(), container.begin() + elem_size * 2,
-			container.end());
-	for (iterator it(container.begin() + elem_size * 2); it
-		+ elem_size < container.end(); it += elem_size * 2)
+	iterator it(container.begin() + elem_size * 2);
+	for (; it + elem_size <= container.end(); it += elem_size)
 	{
 		pend.insert(pend.end(), it, it + elem_size);
 		if (it + elem_size * 2 > container.end())
-		{
-			odd.insert(odd.end(), it + elem_size, container.end());
-			break ;
-		}
+			continue ;
 		main.insert(main.end(), it + elem_size, it + elem_size * 2);
+		it += elem_size;
 	}
-	for (iterator it(pend.begin()); it + elem_size <= pend.end(); it
-		+= elem_size)
+	if (it < container.end())
+		odd.insert(odd.end(), it, container.end());
+	it = pend.begin();
+	for (; it + elem_size <= pend.end(); it += elem_size)
 	{
 		T element(it, it + elem_size);
-		iterator it2(main.begin());
-		for (; it2 + elem_size <= main.end(); it2 += elem_size)
-		{
-			T element2(it2, it2 + elem_size);
-			if (element.back() < element2.back())
-			{
-				main.insert(it2, element.begin(), element.end());
-				break ;
-			}
-		}
-		if (it2 == main.end())
-			main.insert(main.end(), element.begin(), element.end());
+		iterator low(main.begin() + elem_size - 1);
+		iterator high(main.end() - 1);
+		iterator search(BinarySearch(low, high, elem_size, element.back()));
+		main.insert(search - elem_size + 1, element.begin(), element.end());
 	}
 	main.insert(main.end(), odd.begin(), odd.end());
 	container = main;
