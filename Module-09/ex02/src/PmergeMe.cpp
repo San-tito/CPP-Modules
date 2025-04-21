@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/14 01:22:28 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/21 16:24:06 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ template <typename T> T PmergeMe::BinarySearch(T low, T high, size_t e,
 		else
 			high = mid - e;
 	}
-	return (low);
+	return (low - e + 1);
 }
 template std::vector<int>::iterator PmergeMe::BinarySearch(std::vector<int>::iterator,
 	std::vector<int>::iterator, size_t, int);
@@ -121,21 +121,21 @@ template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 	size_t num_elems(container.size() / elem_size);
 	if (num_elems <= 1)
 		return ;
-	for (iterator start(container.begin()); start + elem_size
-		* 2 <= container.end(); start += elem_size * 2)
+	iterator it(container.begin());
+	for (; it + elem_size * 2 <= container.end(); it += elem_size * 2)
 	{
-		iterator mid(start + elem_size);
-		iterator end(start + elem_size * 2);
-		T left(start, mid);
+		iterator mid(it + elem_size);
+		iterator end(it + elem_size * 2);
+		T left(it, mid);
 		T right(mid, end);
 		if (left.back() > right.back())
-			std::swap_ranges(start, mid, mid);
+			std::swap_ranges(it, mid, mid);
 	}
 	Sort(container, elem_size * 2);
 	T main(container.begin(), container.begin() + elem_size * 2);
 	T pend(0);
 	T odd(0);
-	iterator it(container.begin() + elem_size * 2);
+	it = container.begin() + elem_size * 2;
 	for (; it + elem_size <= container.end(); it += elem_size)
 	{
 		pend.insert(pend.end(), it, it + elem_size);
@@ -162,14 +162,20 @@ template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 	// 		diff--;
 	// 	}
 	// }
+	size_t count(0);
 	it = pend.begin();
 	for (; it + elem_size <= pend.end(); it += elem_size)
 	{
 		T element(it, it + elem_size);
+		size_t index((it - pend.begin()) / elem_size + 2);
 		iterator low(main.begin() + elem_size - 1);
 		iterator high(main.end() - 1);
-		iterator search(BinarySearch(low, high, elem_size, element.back()));
-		main.insert(search - elem_size + 1, element.begin(), element.end());
+		size_t limit((index + count) * elem_size);
+		if (limit < main.size())
+			high = main.begin() + limit - 1;
+		iterator spot(BinarySearch(low, high, elem_size, element.back()));
+		main.insert(spot, element.begin(), element.end());
+		count++;
 	}
 	main.insert(main.end(), odd.begin(), odd.end());
 	container = main;
