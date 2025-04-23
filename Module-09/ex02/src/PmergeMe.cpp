@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/21 16:24:06 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/23 12:21:06 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 
 PmergeMe::~PmergeMe(void)
 {
-	std::vector<int> sorted_vec(vec_);
-	std::sort(sorted_vec.begin(), sorted_vec.end());
-	if (sorted_vec != vec_)
+	std::vector<int> sorted(vec_);
+	std::sort(sorted.begin(), sorted.end());
+	if (sorted != vec_)
 		std::cerr << "Error: is not sorted\n";
 }
 
@@ -70,9 +70,9 @@ void PmergeMe::Run(void)
 size_t PmergeMe::Jacobsthal(size_t n)
 {
 	if (n == 0)
-		return (0);
+		return (n);
 	if (n == 1)
-		return (1);
+		return (n);
 	return (Jacobsthal(n - 1) + 2 * Jacobsthal(n - 2));
 }
 
@@ -146,36 +146,44 @@ template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 	}
 	if (it < container.end())
 		odd.insert(odd.end(), it, container.end());
-	// for (size_t jc = 3;; jc++)
-	// {
-	// 	size_t diff(Jacobsthal(jc) - Jacobsthal(jc - 1));
-	// 	if (diff > pend.size() / elem_size)
-	// 		diff = pend.size();
-	// 	while (diff)
-	// 	{
-	// 		T element(pend.begin(), pend.begin() + elem_size);
-	// 		iterator low(main.begin() + elem_size - 1);
-	// 		iterator high(main.end() - 1);
-	// 		iterator search(BinarySearch(low, high, elem_size, element.back()));
-	// 		main.insert(search, element.begin(), element.end());
-	// 		pend.erase(pend.begin(), pend.begin() + elem_size);
-	// 		diff--;
-	// 	}
-	// }
-	size_t count(0);
-	it = pend.begin();
+	size_t inserted(0);
+	size_t prev(Jacobsthal(0));
+	for (size_t jc = 1;; jc++)
+	{
+		size_t curr(Jacobsthal(jc));
+		size_t diff(curr - prev);
+		if (curr > pend.size() / elem_size)
+			break ;
+		for (size_t i = 0; i < diff; i++)
+		{
+			size_t index(curr - i - 1);
+			iterator start(pend.begin() + index * elem_size);
+			iterator end(start + elem_size);
+			T element(start, end);
+			iterator low(main.begin() + elem_size - 1);
+			iterator high(main.end() - 1);
+			size_t limit((index + inserted + 2) * elem_size);
+			if (limit < main.size())
+				high = main.begin() + limit - 1;
+			iterator spot(BinarySearch(low, high, elem_size, element.back()));
+			main.insert(spot, element.begin(), element.end());
+			inserted++;
+		}
+		prev = curr;
+	}
+	it = pend.begin() + (inserted * elem_size);
 	for (; it + elem_size <= pend.end(); it += elem_size)
 	{
 		T element(it, it + elem_size);
-		size_t index((it - pend.begin()) / elem_size + 2);
+		size_t index((it - pend.begin()) / elem_size);
 		iterator low(main.begin() + elem_size - 1);
 		iterator high(main.end() - 1);
-		size_t limit((index + count) * elem_size);
+		size_t limit((index + inserted + 2) * elem_size);
 		if (limit < main.size())
 			high = main.begin() + limit - 1;
 		iterator spot(BinarySearch(low, high, elem_size, element.back()));
 		main.insert(spot, element.begin(), element.end());
-		count++;
+		inserted++;
 	}
 	main.insert(main.end(), odd.begin(), odd.end());
 	container = main;
