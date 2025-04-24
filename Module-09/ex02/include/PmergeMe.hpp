@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/23 12:34:43 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/24 23:57:36 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class PmergeMe
 	template <typename T> double TimedSort(T &container);
 	template <typename T> void Sort(T &container, size_t elem_size = 1);
 	template <typename T> T BinarySearch(T &low, T &high, size_t e, int value);
-	template <typename T> void BinaryInsert(T &elem, T &container, size_t e, size_t limit);
+	template <typename T> void BinaryInsert(T &elem, T &c, size_t e, size_t l);
 };
 
 #endif /* PMERGEME_HPP */

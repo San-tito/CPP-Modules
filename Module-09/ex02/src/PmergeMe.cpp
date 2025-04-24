@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/04/23 12:37:47 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/24 23:59:15 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,16 +115,16 @@ template std::vector<int>::iterator PmergeMe::BinarySearch(std::vector<int>::ite
 template std::deque<int>::iterator PmergeMe::BinarySearch(std::deque<int>::iterator &,
 	std::deque<int>::iterator &, size_t, int);
 
-template <typename T> void PmergeMe::BinaryInsert(T &elem, T &container,
-	size_t e, size_t limit)
+template <typename T> void PmergeMe::BinaryInsert(T &elem, T &c, size_t e,
+	size_t l)
 {
 	typedef typename T::iterator iterator;
-	iterator low(container.begin() + e - 1);
-	iterator high(container.end() - 1);
-	if (limit < container.size())
-		high = container.begin() + limit - 1;
+	iterator low(c.begin() + e - 1);
+	iterator high(c.end() - 1);
+	if (l < c.size())
+		high = c.begin() + l - 1;
 	iterator spot(BinarySearch(low, high, e, elem.back()));
-	container.insert(spot, elem.begin(), elem.end());
+	c.insert(spot, elem.begin(), elem.end());
 }
 template void PmergeMe::BinaryInsert(std::vector<int> &, std::vector<int> &,
 	size_t, size_t);
