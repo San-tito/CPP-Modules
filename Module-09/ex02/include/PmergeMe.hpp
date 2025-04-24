@@ -39,8 +39,7 @@ class PmergeMe
 	template <typename T> double TimedSort(T &container);
 	template <typename T> void Sort(T &container, size_t elem_size = 1);
 	template <typename T> T BinarySearch(T &low, T &high, size_t e, int value);
-	template <typename T> void BinaryInsert(T &elem, T &container, size_t e,
-		size_t index, size_t &inserted);
+	template <typename T> void BinaryInsert(T &elem, T &container, size_t e, size_t limit);
 };
 
 #endif /* PMERGEME_HPP */

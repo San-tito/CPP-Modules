@@ -116,22 +116,20 @@ template std::deque<int>::iterator PmergeMe::BinarySearch(std::deque<int>::itera
 	std::deque<int>::iterator &, size_t, int);
 
 template <typename T> void PmergeMe::BinaryInsert(T &elem, T &container,
-	size_t e, size_t index, size_t &inserted)
+	size_t e, size_t limit)
 {
 	typedef typename T::iterator iterator;
 	iterator low(container.begin() + e - 1);
 	iterator high(container.end() - 1);
-	size_t limit((index + inserted + 2) * e);
 	if (limit < container.size())
 		high = container.begin() + limit - 1;
 	iterator spot(BinarySearch(low, high, e, elem.back()));
 	container.insert(spot, elem.begin(), elem.end());
-	inserted++;
 }
 template void PmergeMe::BinaryInsert(std::vector<int> &, std::vector<int> &,
-	size_t, size_t, size_t &);
+	size_t, size_t);
 template void PmergeMe::BinaryInsert(std::deque<int> &, std::deque<int> &,
-	size_t, size_t, size_t &);
+	size_t, size_t);
 
 template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 {
@@ -178,7 +176,9 @@ template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 			iterator start(pend.begin() + index * elem_size);
 			iterator end(start + elem_size);
 			T element(start, end);
-			BinaryInsert(element, main, elem_size, index, inserted);
+			size_t limit((index + inserted + 2) * elem_size);
+			BinaryInsert(element, main, elem_size, limit);
+			inserted++;
 		}
 		prev = curr;
 	}
@@ -187,7 +187,9 @@ template <typename T> void PmergeMe::Sort(T &container, size_t elem_size)
 	{
 		T element(it, it + elem_size);
 		size_t index((it - pend.begin()) / elem_size);
-		BinaryInsert(element, main, elem_size, index, inserted);
+		size_t limit((index + inserted + 2) * elem_size);
+		BinaryInsert(element, main, elem_size, limit);
+		inserted++;
 	}
 	main.insert(main.end(), odd.begin(), odd.end());
 	container = main;
