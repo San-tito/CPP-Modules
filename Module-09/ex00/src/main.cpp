@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/02/07 12:20:57 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/25 11:57:10 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,14 @@ int	main(int argc, char *argv[])
 		std::cerr << "Error: could not open file.\n";
 		return (1);
 	}
-	BitcoinExchange bitcoinExchange("data.csv");
+	std::ifstream db("data.csv");
+	if (db.is_open() == 0)
+	{
+		std::cerr << "Error: could not open db file.\n";
+		file.close();
+		return (1);
+	}
+	BitcoinExchange bitcoinExchange(db);
 	std::string line;
 	while (std::getline(file, line))
 	{
@@ -40,5 +47,6 @@ int	main(int argc, char *argv[])
 		}
 	}
 	file.close();
+	db.close();
 	return (0);
 }

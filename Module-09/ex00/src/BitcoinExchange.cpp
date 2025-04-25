@@ -6,17 +6,14 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/02/17 15:10:32 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/25 11:56:52 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange(const char *filename)
+BitcoinExchange::BitcoinExchange(std::ifstream &file)
 {
-	std::ifstream file(filename);
-	if (!file.is_open())
-		throw std::runtime_error("Error: could not open db file");
 	std::string line;
 	while (std::getline(file, line))
 	{
@@ -26,7 +23,6 @@ BitcoinExchange::BitcoinExchange(const char *filename)
 		if (std::getline(iss, date, ',') && iss >> price)
 			data_[parseDate(trim(date))] = price;
 	}
-	file.close();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)

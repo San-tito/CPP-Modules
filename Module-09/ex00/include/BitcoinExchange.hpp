@@ -6,7 +6,7 @@
 /*   By: sguzman <sguzman@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:58:41 by sguzman           #+#    #+#             */
-/*   Updated: 2025/02/12 13:26:42 by sguzman          ###   ########.fr       */
+/*   Updated: 2025/04/25 11:56:17 by sguzman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 class BitcoinExchange
 {
   public:
-	BitcoinExchange(const char *filename);
+	BitcoinExchange(std::ifstream &file);
 	BitcoinExchange(const BitcoinExchange &other);
 	BitcoinExchange &operator=(const BitcoinExchange &other);
 	~BitcoinExchange(void);
